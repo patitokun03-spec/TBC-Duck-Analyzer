@@ -153,9 +153,33 @@
         }
     </script>
 
+    <div id="resultados"></div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        // GitHub Feedback System
+        document.getElementById('feedbackBtn').addEventListener('click', function () {
+            const gitHubIssueUrl = 'https://github.com/patitokun03-spec/TBC-Duck-Analyzer/issues/new?labels=feedback&template=bug_report.md';
+            window.open(gitHubIssueUrl, '_blank');
+        });
+
+        // GitHub Repository Button
+        document.getElementById('githubBtn').addEventListener('click', function () {
+            window.open('https://github.com/patitokun03-spec/TBC-Duck-Analyzer', '_blank');
+        });
+
+        // Show tutorial only once
+        if (!localStorage.getItem('tutorialVisto')) {
+            setTimeout(() => openTutorial(), 1500);
+            localStorage.setItem('tutorialVisto', 'true');
+        }
+    </script>
+
     <footer class="app-footer">
         <div class="footer-content">
-            <p>TBC Duck Analyzer © 2024 | <a href="https://github.com/patitokun03-spec/TBC-Duck-Analyzer"
+            <p>TBC Duck Analyzer © 2026 | <a href="https://github.com/patitokun03-spec/TBC-Duck-Analyzer"
                     target="_blank">Open Source on GitHub</a></p>
             <p style="font-size: 0.85rem; color: #888;">WoW TBC Log Analyzer | Made for the community</p>
         </div>
