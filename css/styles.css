@@ -112,7 +112,7 @@ button:active { transform: translateY(1px); }
 .Warlock-row { background: rgba(148, 130, 201, 0.08); border-color: rgba(148, 130, 201, 0.3); } .Warlock-header { background: #9482C9; color: white;} .Warlock-color { color: #9482C9; }
 .Druid-row { background: rgba(255, 125, 10, 0.08); border-color: rgba(255, 125, 10, 0.3); } .Druid-header { background: #FF7D0A; color: #111; } .Druid-color { color: #FF7D0A; }
 
-/* BOTÓN DE FEEDBACK FLOTANTE */
+/* FEEDBACK BUTTON */
 .feedback-btn {
     position: fixed;
     bottom: 25px;
@@ -141,6 +141,37 @@ button:active { transform: translateY(1px); }
 .feedback-btn:active {
     transform: translateY(1px);
     box-shadow: 0 2px 8px rgba(0, 123, 255, 0.4);
+}
+
+/* GITHUB BUTTON */
+.github-btn {
+    position: fixed;
+    bottom: 90px;
+    right: 25px;
+    padding: 12px 18px;
+    background: linear-gradient(135deg, #1f6feb, #0969da);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(31, 110, 251, 0.4), 0 0 20px rgba(31, 110, 251, 0.2);
+    z-index: 999;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.github-btn:hover {
+    background: linear-gradient(135deg, #0969da, #0860ca);
+    box-shadow: 0 6px 20px rgba(31, 110, 251, 0.6), 0 0 30px rgba(31, 110, 251, 0.4);
+    transform: translateY(-2px);
+}
+
+.github-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(31, 110, 251, 0.4);
 }
 
 /* MODAL CONFIGURACION REDISEÑADO PRO */
@@ -172,3 +203,100 @@ button:active { transform: translateY(1px); }
 .custom-tooltip { visibility: hidden; opacity: 0; position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%); background: #23232b; color: #fff; text-align: center; border-radius: 4px; padding: 8px 12px; font-size: 0.8rem; font-weight: bold; border: 1px solid #726299; z-index: 100; white-space: nowrap; box-shadow: 0 5px 15px rgba(0,0,0,0.7); transition: opacity 0.2s ease, bottom 0.2s ease; pointer-events: none; font-family: 'Expressway', 'Montserrat', sans-serif;}
 .custom-tooltip::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -6px; border-width: 6px; border-style: solid; border-color: #726299 transparent transparent transparent; }
 .has-tooltip:hover .custom-tooltip { visibility: visible; opacity: 1; bottom: 135%; }
+
+/* --- FOOTER --- */
+.app-footer {
+    margin-top: 4rem;
+    margin-left: -2rem;
+    margin-right: -2rem;
+    margin-bottom: -1rem;
+    padding: 2rem;
+    text-align: center;
+    background: linear-gradient(to bottom, rgba(20, 20, 20, 0.5), #111);
+    border-top: 1px solid rgba(244, 180, 0, 0.2);
+    color: #aaa;
+    font-size: 0.95rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-content p {
+    margin: 8px 0;
+}
+
+.footer-content a {
+    color: #f4b400;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.footer-content a:hover {
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(244, 180, 0, 0.5);
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+    body {
+        padding: 0.5rem 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+    }
+
+    .top-bar {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .top-bar input {
+        width: 100%;
+    }
+
+    .audit-btn {
+        width: 100%;
+    }
+
+    #btnDiscord {
+        width: 100% !important;
+    }
+
+    .github-btn,
+    .feedback-btn {
+        bottom: auto;
+        top: 10px;
+        position: absolute;
+        right: 10px;
+    }
+
+    .github-btn {
+        right: 90px;
+    }
+
+    .mechanics-sidebar {
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .player-card {
+        min-width: 140px;
+    }
+
+    .encounter-tabs {
+        gap: 5px;
+    }
+
+    .tab-btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+}

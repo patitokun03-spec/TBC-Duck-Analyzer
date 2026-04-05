@@ -37,7 +37,7 @@ Please include:
 
 ### 2️⃣ Request Features
 
-1. Go to [GitHub Issues](https://github.com/PatoChivato/analyzer/issues)
+1. Go to [GitHub Issues](https://github.com/patitokun03-spec/TBC-Duck-Analyzer/issues)
 2. Click **"New Issue"**
 3. Choose **"Feature request"**
 4. Describe your idea:
@@ -93,7 +93,7 @@ If you need an icon that doesn't exist:
 
 ```bash
 # Clone the repository
-git clone https://github.com/PatoChivato/analyzer.git
+git clone https://github.com/patitokun03-spec/TBC-Duck-Analyzer.git
 cd analyzer
 
 # Open in your favorite editor
@@ -239,7 +239,7 @@ All contributors will be mentioned in:
 
 - 📧 Email: dev@patochivato.com (coming soon)
 - 💬 Discord: [Development Channel](https://discord.gg/patochivato) (coming soon)
-- 🐛 Issues: [GitHub Issues](https://github.com/PatoChivato/analyzer/issues)
+- 🐛 Issues: [GitHub Issues](https://github.com/patitokun03-spec/TBC-Duck-Analyzer/issues)
 
 ---
 

@@ -1,83 +1,50 @@
 # Changelog
 
-Todos los cambios importantes en este proyecto serán documentados en este archivo.
+All notable changes to TBC Duck Analyzer are documented here.
 
-## [1.0.0] - 2026-04-05 - LANZAMIENTO OFICIAL
+## [1.0.0] - 2026-04-05 - Official Release
 
-### ✨ Características Nuevas
-- Sistema de análisis de logs de WarcraftLogs
-- Rastreo de consumibles (pociones, sappers, piedras de afilado)
-- Detección automática de buffs y encantamientos de arma
-- Panel de especialización automática
-- Soporte para Discord Webhooks
+### ✨ Features
+- **Log Analysis** - Analyze World of Warcraft TBC combat logs from Warcraft Logs
+- **Consumables Tracking** - Track potions, sappers, food buffs, and weapon enchants per player
+- **Interrupt Detection** - Automatically detect interrupt abilities used in combat
+- **Racial Abilities** - Track racial ability usage (Arcane Torrent, Stoneform, War Stomp, etc.)
+- **Auto Spec Detection** - Automatically identify player specialization
+- **Discord Integration** - Export analysis results to Discord (optional)
+- **Local Storage** - Securely store API keys in your browser (never sent to servers)
+- **Interactive UI** - Dark theme with modern, responsive design
 
-### 🎯 Habilidades de Interrupción Agregadas
-- **Rogue**: Kick (38768)
-- **Warrior**: Pummel (6554), Shield Bash (29704)
-- **Mage**: Counterspell (2139)
-- **Shaman**: Earth Shock (25454)
+### 🎯 Supported Abilities
+- Interrupt abilities for Rogue, Warrior, Mage, and Shaman
+- Racial abilities for all playable races
+- 26+ consumable types tracked and counted
 
-Solo se muestran cuando realmente interrumpen un casteo.
-
-### 🏁 Habilidades Raciales Agregadas
-- **Blood Elf**: Arcane Torrent (28730)
-- **Undead**: Will of the Forsaken (7744)
-- **Dwarf**: Stoneform (20594)
-- **Tauren**: War Stomp (20549)
-
-### 📁 Mejoras de Infraestructura
-- Estructura de carpetas reorganizada (css/, js/, assets/, docs/)
-- Sistema de feedback integrado (GitHub Issues)
-- Tutorial inicial para nuevos usuarios
-- Documentación completa
-
-### 🔧 Cambios Técnicos
-- 145+ iconos descargados localmente (mejor rendimiento)
-- Migración de iconos a assets/icons
-- Detección mejorada de especialización
-- Lógica de display condicional para interrupts
-
-### ✅ Cumplidos
-- Analizar consumibles por jugador
-- Mostrar buffs y encantamientos
-- Tracking de interrupts por evento
-- Detección de specs TBC
-- Sistema de almacenamiento local de API keys
-
-### 🚧 Conocidos/Limitaciones
-- WarcraftLogs no siempre envía especialización específica (solo clase)
-- Algunos iconos de consumibles raros pueden no disponerse
-- No se rastrea daño en consumibles innecesarios (planeado v1.1)
-
-### 📊 Estadísticas
-- 145 iconos en repositorio
-- 26 consumibles soportados
-- 4 interrupts+1 shield bash
-- 4 habilidades raciales
-- 9 clases de WoW TBC
+### 🐛 Known Limitations
+- Warcraft Logs may not always provide specific specialization (shows class only)
+- Some consumables may have limited icon availability
+- Discord export requires a valid webhook URL
 
 ---
 
 ## [0.9.0] - 2026-04-01 - Beta
 
-### ✨ Características Beta
-- Prototipo inicial de análisis
-- Rastreo básico de especializaciones
-- Primeras 10 consumibles
-
-### 🐛 Bugs Solucionados  
-- Problema de iconos pixelados (resuelto con calidad media)
-- Error en detección de Paladines Protection
+### ✨ Initial Features
+- Basic log analysis
+- Spec detection (first version)
+- Consumable tracking (beta)
 
 ---
 
-## Próximas Mejoras (v1.1+)
+## Planned Improvements (v1.1+)
 
-### Fase 1: Equipamiento (v1.1)
-- [ ] Scanner automático de equipo
-- [ ] Marcar consumibles no óptimos
-- [ ] Sugerir mejoras de enchants
-- [ ] Caché de logs analizados
+- [ ] Equipment scanner
+- [ ] Suggest optimal consumables
+- [ ] Cache analyzed logs
+- [ ] More detailed analytics
+
+---
+
+**For feedback or bug reports, use the 📝 Feedback button in the app or [open an issue on GitHub](https://github.com/patitokun03-spec/TBC-Duck-Analyzer/issues)**
 
 ### Fase 2: Análisis (v1.2)
 - [ ] Estadísticas por encuentro

@@ -87,7 +87,7 @@ Analyzer/
 ¿Encontraste un bug o tienes una sugerencia?
 
 - Usa el botón **📝 Feedback** en la página
-- O crea un issue en [GitHub Issues](https://github.com/PatoChivato/analyzer/issues)
+- O crea un issue en [GitHub Issues](https://github.com/patitokun03-spec/TBC-Duck-Analyzer/issues)
 
 ### Tipos de Reporte
 - 🔴 **Bug**: Algo no funciona correctamente

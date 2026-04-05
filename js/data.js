@@ -133,119 +133,120 @@ const ENCHANT_DB = {
 
 const SPELL_DB = {
     // Paladin
-    1020: { name: "Divine Shield", icon: "spell_holy_divineintervention" },
-    642:  { name: "Divine Shield", icon: "spell_holy_divineintervention" },
-    27138: { name: "Exorcism", icon: "spell_holy_excorcism_02" },
-    31884: { name: "Avenging Wrath", icon: "spell_holy_avenginewrath" },
+    1020: { name: "Divine Shield", icon: "spell_holy_divineintervention", category: 1 },
+    642:  { name: "Divine Shield", icon: "spell_holy_divineintervention", category: 1 },
+    27138: { name: "Exorcism", icon: "spell_holy_excorcism_02", category: 2 },
+    31884: { name: "Avenging Wrath", icon: "spell_holy_avenginewrath", category: 1 },
     
     // Mage
-    30449: { name: "Spellsteal", icon: "spell_arcane_arcane02" },
-    12472: { name: "Icy Veins", icon: "spell_frost_coldhearted" },
-    12042: { name: "Arcane Power", icon: "spell_nature_lightning" },
-    27619: { name: "Ice Block", icon: "spell_frost_frost" }, 
-    45438: { name: "Ice Block", icon: "spell_frost_frost" }, 
-    27089: { name: "Mana Gem", icon: "inv_misc_gem_sapphire_02" },
-    2139:  { name: "Counterspell", icon: "spell_frost_iceshock", isInterrupt: true }, 
+    30449: { name: "Spellsteal", icon: "spell_arcane_arcane02", category: 2 },
+    12472: { name: "Icy Veins", icon: "spell_frost_coldhearted", category: 1 },
+    12042: { name: "Arcane Power", icon: "spell_nature_lightning", category: 1 },
+    27619: { name: "Ice Block", icon: "spell_frost_frost", category: 1 }, 
+    45438: { name: "Ice Block", icon: "spell_frost_frost", category: 1 }, 
+    27089: { name: "Mana Gem", icon: "inv_misc_gem_sapphire_02", category: 2 },
+    2139:  { name: "Counterspell", icon: "spell_frost_iceshock", isInterrupt: true, category: 2 }, 
     
     // Rogue
-    13877: { name: "Blade Flurry", icon: "ability_warrior_punishingblow" },
-    13750: { name: "Adrenaline Rush", icon: "spell_shadow_shadowworddominate" },
-    11305: { name: "Sprint", icon: "ability_rogue_sprint" },
-    12328: { name: "Sweeping Strikes", icon: "ability_rogue_slicedice" },
-    9512:  { name: "Thistle Tea", icon: "inv_drink_milk_05" },
-    31224: { name: "Cloak of Shadows", icon: "spell_shadow_nethercloak" },
-    6774:  { name: "Slice and Dice", icon: "ability_rogue_slicedice" },
-    26866: { name: "Expose Armor", icon: "ability_warrior_riposte" },
-    38768: { name: "Kick", icon: "ability_kick", isInterrupt: true }, 
+    13877: { name: "Blade Flurry", icon: "ability_warrior_punishingblow", category: 1 },
+    13750: { name: "Adrenaline Rush", icon: "spell_shadow_shadowworddominate", category: 1 },
+    11305: { name: "Sprint", icon: "ability_rogue_sprint", category: 2 },
+    12328: { name: "Sweeping Strikes", icon: "ability_rogue_slicedice", category: 2 },
+    9512:  { name: "Thistle Tea", icon: "inv_drink_milk_05", category: 5 },
+    31224: { name: "Cloak of Shadows", icon: "spell_shadow_nethercloak", category: 1 },
+    6774:  { name: "Slice and Dice", icon: "ability_rogue_slicedice", category: 2 },
+    26866: { name: "Expose Armor", icon: "ability_warrior_riposte", category: 2 },
+    38768: { name: "Kick", icon: "ability_kick", isInterrupt: true, category: 2 }, 
     
     // Priest
-    14751: { name: "Inner Focus", icon: "spell_frost_windwalkon" },
-    34433: { name: "Shadowfiend", icon: "spell_shadow_shadowfiend" },
-    10060: { name: "Power Infusion", icon: "spell_holy_powerinfusion" },
-    33206: { name: "Pain Suppression", icon: "spell_holy_painsupression" },
-    6346:  { name: "Fear Ward", icon: "spell_holy_excorcism" }, 
+    14751: { name: "Inner Focus", icon: "spell_frost_windwalkon", category: 2 },
+    34433: { name: "Shadowfiend", icon: "spell_shadow_shadowfiend", category: 1 },
+    10060: { name: "Power Infusion", icon: "spell_holy_powerinfusion", category: 1 },
+    33206: { name: "Pain Suppression", icon: "spell_holy_painsupression", category: 1 },
+    6346:  { name: "Fear Ward", icon: "spell_holy_excorcism", category: 1 }, 
     
     // Hunter
-    3045: { name: "Rapid Fire", icon: "ability_hunter_runningshot" },
-    19574: { name: "Bestial Wrath", icon: "ability_druid_ferociousbite" },
-    34477: { name: "Misdirection", icon: "ability_hunter_misdirection" },
+    3045: { name: "Rapid Fire", icon: "ability_hunter_runningshot", category: 1 },
+    19574: { name: "Bestial Wrath", icon: "ability_druid_ferociousbite", category: 1 },
+    23989: { name: "Readiness", icon: "ability_hunter_readiness", category: 1 },
+    34477: { name: "Misdirection", icon: "ability_hunter_misdirection", category: 2 },
     
     // Warrior
-    12292: { name: "Death Wish", icon: "spell_shadow_deathpact" },
-    1719:  { name: "Recklessness", icon: "ability_criticalstrike" },
-    6554:  { name: "Pummel", icon: "inv_gauntlets_04", isInterrupt: true },
-    29704: { name: "Shield Bash", icon: "ability_warrior_shieldbash", isInterrupt: true },
+    12292: { name: "Death Wish", icon: "spell_shadow_deathpact", category: 1 },
+    1719:  { name: "Recklessness", icon: "ability_criticalstrike", category: 1 },
+    6554:  { name: "Pummel", icon: "inv_gauntlets_04", isInterrupt: true, category: 2 },
+    29704: { name: "Shield Bash", icon: "ability_warrior_shieldbash", isInterrupt: true, category: 2 },
     
     // Warlock
-    29858: { name: "Soulshatter", icon: "spell_arcane_arcane01" },
-    27226: { name: "Curse Recklessness", icon: "spell_shadow_unholystrength" }, 
-    11717: { name: "Curse Recklessness", icon: "spell_shadow_unholystrength" }, 
-    27228: { name: "Curse Elements", icon: "spell_shadow_chilltouch" },
-    27263: { name: "Shadowburn", icon: "spell_shadow_scourgebuild" },
+    29858: { name: "Soulshatter", icon: "spell_arcane_arcane01", category: 2 },
+    27226: { name: "Curse Recklessness", icon: "spell_shadow_unholystrength", category: 2 }, 
+    11717: { name: "Curse Recklessness", icon: "spell_shadow_unholystrength", category: 2 }, 
+    27228: { name: "Curse Elements", icon: "spell_shadow_chilltouch", category: 2 },
+    27263: { name: "Shadowburn", icon: "spell_shadow_scourgebuild", category: 2 },
     
     // Shaman
-    2825: { name: "Bloodlust", icon: "spell_nature_bloodlust" },
-    32182: { name: "Heroism", icon: "ability_shaman_heroism" },
-    2894: { name: "Fire Elemental", icon: "spell_fire_elemental_totem" },
-    32594: { name: "Earth Shield", icon: "spell_nature_skinofearth" },
-    30823: { name: "Shamanistic Rage", icon: "spell_nature_shamanrage" },
-    16166: { name: "Elemental Mastery", icon: "spell_nature_wispheal" },
-    16190: { name: "Mana Tide Totem", icon: "spell_frost_summonwaterelemental" },
-    25454: { name: "Earth Shock", icon: "spell_nature_earthshock", isInterrupt: true },
+    2825: { name: "Bloodlust", icon: "spell_nature_bloodlust", category: 1 },
+    32182: { name: "Heroism", icon: "ability_shaman_heroism", category: 1 },
+    2894: { name: "Fire Elemental", icon: "spell_fire_elemental_totem", category: 1 },
+    32594: { name: "Earth Shield", icon: "spell_nature_skinofearth", category: 1 },
+    30823: { name: "Shamanistic Rage", icon: "spell_nature_shamanrage", category: 1 },
+    16166: { name: "Elemental Mastery", icon: "spell_nature_wispheal", category: 2 },
+    16190: { name: "Mana Tide Totem", icon: "spell_frost_summonwaterelemental", category: 1 },
+    25454: { name: "Earth Shock", icon: "spell_nature_earthshock", isInterrupt: true, category: 2 },
     
     // Druid
-    29166: { name: "Innervate", icon: "spell_nature_lightning" },
-    22812: { name: "Barkskin", icon: "spell_nature_stoneclawtotem" },
-    18562: { name: "Swiftmend", icon: "inv_relics_idolofrejuvenation" },
-    33831: { name: "Force of Nature", icon: "ability_druid_forceofnature" },
-    16188: { name: "Nature's Swiftness", icon: "spell_nature_ravenform" },
-    26993: { name: "Faerie Fire", icon: "spell_nature_faeriefire" },
-    33602: { name: "Improved Faerie Fire", icon: "spell_nature_faeriefire" },
+    29166: { name: "Innervate", icon: "spell_nature_lightning", category: 1 },
+    22812: { name: "Barkskin", icon: "spell_nature_stoneclawtotem", category: 1 },
+    18562: { name: "Swiftmend", icon: "inv_relics_idolofrejuvenation", category: 2 },
+    33831: { name: "Force of Nature", icon: "ability_druid_forceofnature", category: 1 },
+    16188: { name: "Nature's Swiftness", icon: "spell_nature_ravenform", category: 2 },
+    26993: { name: "Faerie Fire", icon: "spell_nature_faeriefire", category: 2 },
+    33602: { name: "Improved Faerie Fire", icon: "spell_nature_faeriefire", category: 2 },
     // Paladin
-    27154: { name: "Lay on Hands", icon: "spell_holy_layonhands" },
-    20235: { name: "Lay on Hands", icon: "spell_holy_layonhands" },
-    20216: { name: "Divine Flavor", icon: "spell_holy_heal" },
-    31842: { name: "Divine Illumination", icon: "spell_holy_divineillumination" },
+    27154: { name: "Lay on Hands", icon: "spell_holy_layonhands", category: 1 },
+    20235: { name: "Lay on Hands", icon: "spell_holy_layonhands", category: 1 },
+    20216: { name: "Divine Flavor", icon: "spell_holy_heal", category: 2 },
+    31842: { name: "Divine Illumination", icon: "spell_holy_divineillumination", category: 2 },
 
-    // Abalorios, Botas y Raciales
-    15821: { name: "BL Brooch", icon: "inv_misc_monsterscales_15" },
-    35166: { name: "Bloodlust Brooch", icon: "inv_misc_monsterscales_15" },
-    35165: { name: "Essence of Martyr", icon: "inv_valentineperfumebottle" },
-    17320: { name: "Essence Martyr", icon: "inv_valentineperfumebottle" },
-    35163: { name: "Silver Crescent", icon: "inv_weapon_shortblade_23" },
-    28093: { name: "Swarmguard", icon: "inv_misc_ahnqirajtrinket_04" },
-    23723: { name: "Mind Quickening", icon: "spell_nature_wispheal" },
-    26297: { name: "Berserking", icon: "spell_shadow_berserk" },
-    20554: { name: "Berserking", icon: "racial_troll_berserk" }, 
-    20572: { name: "Blood Fury", icon: "racial_orc_berserkerstrength" }, 
-    51582: { name: "Rocket Boots", icon: "inv_gizmo_rocketboot_01" }, // Añadidas Rocket Boots
+    // Trinkets
+    15821: { name: "BL Brooch", icon: "inv_misc_monsterscales_15", category: 3 },
+    35166: { name: "Bloodlust Brooch", icon: "inv_misc_monsterscales_15", category: 3 },
+    35165: { name: "Essence of Martyr", icon: "inv_valentineperfumebottle", category: 3 },
+    17320: { name: "Essence Martyr", icon: "inv_valentineperfumebottle", category: 3 },
+    35163: { name: "Silver Crescent", icon: "inv_weapon_shortblade_23", category: 3 },
+    28093: { name: "Swarmguard", icon: "inv_misc_ahnqirajtrinket_04", category: 3 },
+    23723: { name: "Mind Quickening", icon: "spell_nature_wispheal", category: 3 },
+    26297: { name: "Berserking", icon: "spell_shadow_berserk", category: 3 },
+    20554: { name: "Berserking", icon: "racial_troll_berserk", category: 3 }, 
+    20572: { name: "Blood Fury", icon: "racial_orc_berserkerstrength", category: 3 }, 
+    51582: { name: "Rocket Boots", icon: "inv_gizmo_rocketboot_01", category: 3 },
     
-    // Raciales Raza
-    28730: { name: "Arcane Torrent", icon: "spell_shadow_teleport" }, // Blood Elf
-    7744:  { name: "Will of the Forsaken", icon: "spell_shadow_deathcoil" }, // Undead
-    20594: { name: "Stoneform", icon: "inv_shield_26" }, // Dwarf
-    20549: { name: "War Stomp", icon: "ability_warstomp" }, // Tauren
+    // Racial Abilities
+    28730: { name: "Arcane Torrent", icon: "spell_shadow_teleport", category: 4 },
+    7744:  { name: "Will of the Forsaken", icon: "spell_shadow_deathcoil", category: 4 },
+    20594: { name: "Stoneform", icon: "inv_shield_26", category: 4 },
+    20549: { name: "War Stomp", icon: "ability_warstomp", category: 4 },
     
-    // Healthstones y Sappers
-    27238: { name: "Healthstone", icon: "inv_stone_04" }, 
-    43204: { name: "Healthstone", icon: "inv_stone_04" }, 
-    27239: { name: "Healthstone", icon: "inv_stone_04" }, 
-    27237: { name: "Healthstone", icon: "inv_stone_04" }, 
+    // Consumables (Healthstones, Sappers)
+    27238: { name: "Healthstone", icon: "inv_stone_04", category: 5 }, 
+    43204: { name: "Healthstone", icon: "inv_stone_04", category: 5 }, 
+    27239: { name: "Healthstone", icon: "inv_stone_04", category: 5 }, 
+    27237: { name: "Healthstone", icon: "inv_stone_04", category: 5 }, 
     
-    30486: { name: "TBC Sapper", icon: "inv_gizmo_supersappercharge" },
-    13241: { name: "Goblin Sapper", icon: "spell_fire_selfdestruct" }, // Sapper de Classic Añadido
+    30486: { name: "TBC Sapper", icon: "inv_gizmo_supersappercharge", category: 5 },
+    13241: { name: "Goblin Sapper", icon: "spell_fire_selfdestruct", category: 5 },
 
-    // Pociones, Runas
-    28507: { name: "Haste Potion", icon: "inv_potion_108" },
-    28508: { name: "Destruction Potion", icon: "inv_potion_107" },
-    17531: { name: "Super Mana Potion", icon: "inv_potion_137" },
-    17534: { name: "Super Healing Potion", icon: "inv_potion_153" },
-    28515: { name: "Ironshield Potion", icon: "inv_potion_133" },
-    35476: { name: "Drums of Battle", icon: "inv_misc_drum_02" },
-    35478: { name: "Drums of Resto", icon: "inv_misc_drum_01" },
-    28499: { name: "Mana Pot/Injector", icon: "inv_potion_137" }, 
-    27869: { name: "Dark Rune", icon: "spell_shadow_sealofkings" }, 
-    16666: { name: "Demonic Rune", icon: "inv_misc_rune_04" }, 
-    28495: { name: "Super Healing Potion", icon: "inv_potion_131" }
+    // Potions & Runes
+    28507: { name: "Haste Potion", icon: "inv_potion_108", category: 5 },
+    28508: { name: "Destruction Potion", icon: "inv_potion_107", category: 5 },
+    17531: { name: "Super Mana Potion", icon: "inv_potion_137", category: 5 },
+    17534: { name: "Super Healing Potion", icon: "inv_potion_153", category: 5 },
+    28515: { name: "Ironshield Potion", icon: "inv_potion_133", category: 5 },
+    35476: { name: "Drums of Battle", icon: "inv_misc_drum_02", category: 5 },
+    35478: { name: "Drums of Resto", icon: "inv_misc_drum_01", category: 5 },
+    28499: { name: "Mana Pot/Injector", icon: "inv_potion_137", category: 5 }, 
+    27869: { name: "Dark Rune", icon: "spell_shadow_sealofkings", category: 5 }, 
+    16666: { name: "Demonic Rune", icon: "inv_misc_rune_04", category: 5 }, 
+    28495: { name: "Super Healing Potion", icon: "inv_potion_131", category: 5 }
 };
 

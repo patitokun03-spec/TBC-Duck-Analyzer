@@ -1,14 +1,27 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PatoChivato - Audit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TBC Duck Analyzer - Professional tool to analyze World of Warcraft TBC logs. Check performance, buffs, enchants and more.">
+    <meta name="keywords" content="WoW, TBC, Burning Crusade, analyzer, warcraft logs, audit">
+    <meta name="author" content="TBC Duck Analyzer">
+    <meta property="og:title" content="TBC Duck Analyzer - WoW TBC Log Analyzer">
+    <meta property="og:description" content="Detailed analysis of World of Warcraft TBC combat logs">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#f4b400">
+    <title>TBC Duck Analyzer - WoW TBC Log Analyzer</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' font-family='Arial'>🦆</text></svg>">
 </head>
 <body>
 
-<div id="feedbackBtn" class="feedback-btn" title="Reportar error o sugerencia">
+<div id="feedbackBtn" class="feedback-btn" title="Report a bug or suggestion">
     📝 Feedback
+</div>
+
+<div id="githubBtn" class="github-btn" title="Go to GitHub repository">
+    ⭐ GitHub
 </div>
 
 <div class="overlay" id="settingsOverlay">
@@ -54,7 +67,7 @@
         <div class="settings-body" style="color: #ccc; font-size: 0.95rem; line-height: 1.8;">
             <p><strong>1.</strong> Log in to <a href="https://www.warcraftlogs.com/profile" target="_blank" style="color: #f4b400; font-weight: bold; text-decoration:none;">Warcraft Logs Profile</a>.</p>
             <p><strong>2.</strong> Scroll to the bottom of the page to the <b>API Clients</b> section.</p>
-            <p><strong>3.</strong> Create a new client (V2) called "PatoChivato".</p>
+            <p><strong>3.</strong> Create a new client (V2) called "TBC Duck Analyzer".</p>
             <p><strong>4.</strong> Copy the <b style="color:white">Client ID</b> (36 characters) and the <b style="color:white">Client Secret</b> (40 characters).</p>
             <p><strong>5.</strong> Paste them in the Settings ⚙️ menu on this page.</p>
         </div>
@@ -75,7 +88,7 @@
     </div>
 
     <div class="logo-container">
-        <h1>PATOCHIVATO</h1>
+        <h1>TBC DUCK ANALYZER</h1>
     </div>
 
     <div class="top-bar">
@@ -92,17 +105,29 @@
 <script src="js/data.js"></script>
 <script src="js/script.js"></script>
 <script>
-    // Sistema de Feedback GitHub
+    // GitHub Feedback System
     document.getElementById('feedbackBtn').addEventListener('click', function() {
-        const gitHubIssueUrl = 'https://github.com/PatoChivato/analyzer/issues/new?labels=feedback&template=bug_report.md';
+        const gitHubIssueUrl = 'https://github.com/patitokun03-spec/TBC-Duck-Analyzer/issues/new?labels=feedback&template=bug_report.md';
         window.open(gitHubIssueUrl, '_blank');
     });
+
+    // GitHub Repository Button
+    document.getElementById('githubBtn').addEventListener('click', function() {
+        window.open('https://github.com/patitokun03-spec/TBC-Duck-Analyzer', '_blank');
+    });
     
-    // Mostrar tutorial una sola vez
+    // Show tutorial only once
     if (!localStorage.getItem('tutorialVisto')) {
         setTimeout(() => openTutorial(), 1500);
         localStorage.setItem('tutorialVisto', 'true');
     }
 </script>
+
+<footer class="app-footer">
+    <div class="footer-content">
+        <p>TBC Duck Analyzer © 2024 | <a href="https://github.com/patitokun03-spec/TBC-Duck-Analyzer" target="_blank">Open Source on GitHub</a></p>
+        <p style="font-size: 0.85rem; color: #888;">WoW TBC Log Analyzer | Made for the community</p>
+    </div>
+</footer>
 </body>
 </html>

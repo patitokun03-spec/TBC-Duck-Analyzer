@@ -239,7 +239,7 @@ function buildEncounterHTML(fightId, events, allActors) {
                             const usedBuffs = Object.keys(BUFF_DB).filter(id => infos.some(auras => auras.includes(parseInt(id))));
                             usedBuffs.forEach(id => {
                                 const count = infos.filter(auras => auras.includes(parseInt(id))).length;
-                                let ratioDisplay = `<span class="buff-ratio">${count}${isOverall ? `/${totalFights}` : ''}</span>`;
+                                let ratioDisplay = count === 1 ? '' : `<span class="buff-ratio">${count}${isOverall ? `/${totalFights}` : ''}</span>`;
                                 standardBuffHtmls.push(`<div class="buff-item has-tooltip"><img class="buff-icon" src="assets/icons/${BUFF_DB[id].icon}.jpg" onerror="this.src='assets/icons/inv_misc_questionmark.jpg'"><span class="custom-tooltip">${BUFF_DB[id].name}</span>${ratioDisplay}</div>`);
                             });
 
@@ -257,7 +257,7 @@ function buildEncounterHTML(fightId, events, allActors) {
                             });
 
                             Object.entries(weaponBuffsAggregated).forEach(([enchName, d]) => {
-                                let ratioHtml = (isOverall || totalExpectedWeapons > 1) ? `<span class="buff-ratio">${d.count}/${totalExpectedWeapons}</span>` : "";
+                                let ratioHtml = (isOverall || totalExpectedWeapons > 1) ? (d.count === 1 ? '' : `<span class="buff-ratio">${d.count}/${totalExpectedWeapons}</span>`) : "";
                                 weaponBuffHtmls.push(`<div class="buff-item has-tooltip"><img class="buff-icon weapon-enchant" src="assets/icons/${d.icon}.jpg" onerror="this.src='assets/icons/inv_misc_questionmark.jpg'"><span class="custom-tooltip">${enchName} (Weapon)</span>${ratioHtml}</div>`);
                             });
 
@@ -266,11 +266,13 @@ function buildEncounterHTML(fightId, events, allActors) {
                             htmlBuffs = allBuffHtmls.length === 0 ? '<span style="font-size:0.75rem; color:#ff5252; font-weight:bold;">NO BUFFS</span>' : allBuffHtmls.join('');
                         }
 
-                        let spellListHtml = Object.entries(data.spells).filter(([spellId]) => SPELL_DB[spellId] && spellId != 33671).map(([spellId, sData]) => {
+                        let spellListHtml = Object.entries(data.spells).filter(([spellId]) => SPELL_DB[spellId] && spellId != 33671).sort(([spellIdA], [spellIdB]) => {
+                            const catA = SPELL_DB[spellIdA].category || 2;
+                            const catB = SPELL_DB[spellIdB].category || 2;
+                            return catA - catB;
+                        }).map(([spellId, sData]) => {
                             let dmgText = sData.damage > 0 ? (sData.damage >= 1000 ? (sData.damage / 1000).toFixed(1) + 'k' : sData.damage) : "";
-                            let sName = SPELL_DB[spellId].name;
-                            if (sName.length > 12) sName = sName.substring(0, 10) + '...';
-                            return `<div class="spell-item has-tooltip"><img class="spell-icon" src="assets/icons/${SPELL_DB[spellId].icon}.jpg" onerror="this.src='assets/icons/inv_misc_questionmark.jpg'"><span class="custom-tooltip">${SPELL_DB[spellId].name}</span><span class="spell-name">${sName}</span><span class="spell-count">x${Math.max(1, sData.count)}</span>${sData.damage > 0 ? `<span class="spell-damage">${dmgText}</span>` : ''}</div>`;
+                            return `<div class="spell-item has-tooltip"><img class="spell-icon" src="assets/icons/${SPELL_DB[spellId].icon}.jpg" onerror="this.src='assets/icons/inv_misc_questionmark.jpg'"><span class="custom-tooltip">${SPELL_DB[spellId].name}</span><span class="spell-count">x${Math.max(1, sData.count)}</span>${sData.damage > 0 ? `<span class="spell-damage">${dmgText}</span>` : ''}</div>`;
                         }).join('');
 
                         let specRaw = data.specIcon || cls;

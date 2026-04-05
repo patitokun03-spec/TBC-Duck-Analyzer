@@ -92,7 +92,7 @@ Analyzer/
 Found a bug or have a suggestion?
 
 - Use the **📝 Feedback** button on the page
-- Or create an issue on [GitHub Issues](https://github.com/PatoChivato/analyzer/issues)
+- Or create an issue on [GitHub Issues](https://github.com/patitokun03-spec/TBC-Duck-Analyzer/issues)
 
 ### Report Types
 - 🔴 **Bug**: Something isn't working correctly
