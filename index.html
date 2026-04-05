@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>PatoChivato - Audit</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div id="feedbackBtn" class="feedback-btn" title="Reportar error o sugerencia">
+    📝 Feedback
+</div>
+
+<div class="overlay" id="settingsOverlay">
+    <div class="settings-modal" id="settingsPanel">
+        <div class="settings-header">
+            <h3>⚙️ Profile Settings</h3>
+            <button class="close-btn" onclick="toggleSettings()">×</button>
+        </div>
+        <div class="settings-body">
+            <div class="settings-grid">
+                <div class="input-group">
+                    <label>Profile Name (e.g. Main Raid)</label>
+                    <input type="text" id="profileName" placeholder="Your name...">
+                </div>
+                <div class="input-group">
+                    <label>WCL Client ID <span style="color:#aaa; font-weight:normal;">(36 caracteres)</span></label>
+                    <input type="text" id="wclId" placeholder="Ej: a176f7f9-dd8e-4303-ae31..." oninput="checkKeyLengths()" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label>WCL Client Secret <span style="color:#aaa; font-weight:normal;">(40 characters)</span></label>
+                    <input type="password" id="wclSecret" placeholder="Your Secret Key..." oninput="checkKeyLengths()" autocomplete="new-password">
+                </div>
+                <span id="keyWarning" style="color:#ff5252; font-size:0.85rem; font-weight:bold; display:none; margin-top:-5px;">⚠️ API Keys do not have the correct length. Please check them.</span>
+                
+                <div class="input-group" style="margin-top: 10px;">
+                    <label>Discord Webhook URL (Optional)</label>
+                    <input type="text" id="discordWebhook" placeholder="https://discord.com/api/webhooks/..." autocomplete="off">
+                </div>
+            </div>
+        </div>
+        <div class="settings-footer">
+            <button onclick="saveSettings()" class="save-btn">SAVE AND CONNECT</button>
+        </div>
+    </div>
+</div>
+
+<div class="overlay" id="tutorialOverlay">
+    <div class="settings-modal tutorial-card">
+        <div class="settings-header">
+            <h3>❓ How to get the API Keys</h3>
+            <button class="close-btn" onclick="closeTutorial()">×</button>
+        </div>
+        <div class="settings-body" style="color: #ccc; font-size: 0.95rem; line-height: 1.8;">
+            <p><strong>1.</strong> Log in to <a href="https://www.warcraftlogs.com/profile" target="_blank" style="color: #f4b400; font-weight: bold; text-decoration:none;">Warcraft Logs Profile</a>.</p>
+            <p><strong>2.</strong> Scroll to the bottom of the page to the <b>API Clients</b> section.</p>
+            <p><strong>3.</strong> Create a new client (V2) called "PatoChivato".</p>
+            <p><strong>4.</strong> Copy the <b style="color:white">Client ID</b> (36 characters) and the <b style="color:white">Client Secret</b> (40 characters).</p>
+            <p><strong>5.</strong> Paste them in the Settings ⚙️ menu on this page.</p>
+        </div>
+        <div class="settings-footer">
+            <button onclick="closeTutorial()" class="save-btn" style="background:#0d47a1;">GOT IT!</button>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div style="display: flex; justify-content: flex-end; align-items: center; gap: 10px; padding: 1rem 0;">
+        <div id="loggedInUser" style="display:none; font-size: 0.95rem; color: #aaa; margin-right: 10px;">
+            Profile: <strong id="profileNameDisplay" style="color: #f4b400; letter-spacing: 1px;"></strong>
+            <button onclick="logoutProfile()" style="background: transparent; border: 1px solid #ff5252; color: #ff5252; padding: 0.4rem 0.8rem; border-radius: 4px; margin-left: 10px; cursor: pointer; transition: 0.2s;">Disconnect</button>
+        </div>
+        <button onclick="openTutorial()" class="cog-btn" title="Help API Keys">❓ Help</button>
+        <button onclick="toggleSettings()" class="cog-btn">⚙️ Settings</button>
+    </div>
+
+    <div class="logo-container">
+        <h1>PATOCHIVATO</h1>
+    </div>
+
+    <div class="top-bar">
+        <input type="text" id="logId" placeholder="Paste log URL or ID here..." autocomplete="off" spellcheck="false" data-lpignore="true">
+        <button onclick="auditarLog()" class="audit-btn">LOG CHECK</button>
+        <button id="btnDiscord" onclick="enviarADiscord()" style="display:none; background:#5865F2; margin-left:10px; color:white;">SEND TO DISCORD</button>
+    </div>
+
+    <div id="encounterTabs" class="encounter-tabs"></div>
+
+    <div id="resultados"></div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/script.js"></script>
+<script>
+    // Sistema de Feedback GitHub
+    document.getElementById('feedbackBtn').addEventListener('click', function() {
+        const gitHubIssueUrl = 'https://github.com/PatoChivato/analyzer/issues/new?labels=feedback&template=bug_report.md';
+        window.open(gitHubIssueUrl, '_blank');
+    });
+    
+    // Mostrar tutorial una sola vez
+    if (!localStorage.getItem('tutorialVisto')) {
+        setTimeout(() => openTutorial(), 1500);
+        localStorage.setItem('tutorialVisto', 'true');
+    }
+</script>
+</body>
+</html>

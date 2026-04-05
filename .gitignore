@@ -1,0 +1,40 @@
+# Dependencias y módulos
+node_modules/
+package-lock.json
+yarn.lock
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log
+yarn-error.log
+
+# Archivos temporales
+.temp/
+tmp/
+dist/
+
+# Archivos locales personales
+config.local.json
+personal-notes.txt
+
+# Caché del navegador (si se guarda localmente)
+.cache/
+
+# Directorios de build (si los hay)
+build/
+
+# API Keys específicas del usuario (aunque estén en localStorage)
+# NUNCA commitear credenciales
+.env
+.env.local
+*.key
+credentials.json
