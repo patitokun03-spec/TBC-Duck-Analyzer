@@ -1,4 +1,4 @@
-# 🔍 PATOCHIVATO - WoW Log Analyzer
+# 🔍 TBC Duck Analyzer - WoW Log Analyzer
 
 A professional tool to analyze **World of Warcraft TBC** combat logs from **WarcraftLogs**, displaying consumables, buffs, interrupt abilities, and racial abilities per player.
 
@@ -19,7 +19,7 @@ A professional tool to analyze **World of Warcraft TBC** combat logs from **Warc
 ### 1. Get Your API Keys from WarcraftLogs
 
 1. Go to [WarcraftLogs API Console](https://www.warcraftlogs.com/api/clients)
-2. Create a new client (API v2) called "PatoChivato"
+2. Create a new client (API v2) called "TBC Duck Analyzer"
 3. Copy the **Client ID** (36 characters) and **Client Secret** (40 characters)
 
 ### 2. Configure the Tool

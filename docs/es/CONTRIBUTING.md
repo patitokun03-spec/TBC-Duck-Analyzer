@@ -1,4 +1,4 @@
-# 🤝 Contribuir a PatoChivato
+# 🤝 Contribuir a TBC Duck Analyzer
 
 ¡Gracias por tu interés en contribuir! Esta guía te ayudará a hacerlo.
 

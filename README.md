@@ -30,7 +30,7 @@
 
 ## 🚀 Quick Start
 
-1. Visit [PatoChivato](https://patochivato.github.io/analyzer)
+1. Visit [TBC Duck Analyzer](https://patitokun03-spec.github.io/TBC-Duck-Analyzer)
 2. Click ⚙️ **Settings** and add your Warcraft Logs API keys
 3. Paste a log URL and click **LOG CHECK**
 4. Done! 🎉

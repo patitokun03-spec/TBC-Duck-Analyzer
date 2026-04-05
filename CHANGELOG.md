@@ -73,7 +73,7 @@ Este proyecto sigue [Semantic Versioning](https://semver.org/)
 ## Cómo Reportar Cambios
 
 Si encuentras bugs o tienes sugerencias:
-1. Abre un [GitHub Issue](https://github.com/PatoChivato/analyzer/issues)
+1. Abre un [GitHub Issue](https://github.com/patitokun03-spec/TBC-Duck-Analyzer/issues)
 2. O usa el botón **📝 Feedback** en la web
 
 Incluye:

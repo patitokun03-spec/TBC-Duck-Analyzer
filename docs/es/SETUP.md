@@ -1,6 +1,6 @@
 # 🔧 Guía de Configuración
 
-Esta guía te ayudará a configurar **PATOCHIVATO** paso a paso.
+Esta guía te ayudará a configurar **TBC Duck Analyzer** paso a paso.
 
 ## Requisitos Previos
 
@@ -22,7 +22,7 @@ Esta guía te ayudará a configurar **PATOCHIVATO** paso a paso.
 2. Busca la sección **"API Clients"** o **"API Tokens"**
 3. Haz clic en **"Create New Client (V2)"**
 4. Llena el formulario:
-   - **Application Name**: `PatoChivato` (o el nombre que prefieras)
+   - **Application Name**: `TBC Duck Analyzer` (o el nombre que prefieras)
    - **Description**: `Herramienta personal de análisis de logs`
    - **Redirect URL**: Déjalo en blanco o pon `http://localhost`
 5. Haz clic en **"Create"**
@@ -35,11 +35,11 @@ Después de crear el cliente, verás:
 
 ⚠️ **IMPORTANTE**: Guarda estas claves en un lugar seguro. No las compartas con nadie.
 
-## Paso 2: Configurar PatoChivato
+## Paso 2: Configurar TBC Duck Analyzer
 
 ### 2.1 Abrir la Herramienta
 
-1. Abre [PATOCHIVATO](https://patochivato.com) (o tu servidor local)
+1. Abre [TBC Duck Analyzer](https://patitokun03-spec.github.io/TBC-Duck-Analyzer) (o tu servidor local)
 2. Verás la interfaz principal
 
 ### 2.2 Abrir Settings
@@ -76,7 +76,7 @@ Después de crear el cliente, verás:
 
 ### 3.2 Analizar el Log
 
-1. Vuelve a la página de **PATOCHIVATO**
+1. Vuelve a la página de **TBC Duck Analyzer**
 2. En el campo de entrada, pega el URL del log
 3. Haz clic en **"LOG CHECK"**
 4. ¡Espera a que se cargue el análisis!
@@ -102,10 +102,10 @@ Si quieres enviar los resultados a Discord:
    - Abre Configuración del Servidor
    - Ve a **Integraciones** → **Webhooks**
    - Haz clic en **"Crear Webhook"**
-   - Nombra el webhook "PatoChivato"
+   - Nombra el webhook "TBC Duck Analyzer"
    - Copia la **URL del Webhook**
 
-2. En PATOCHIVATO Settings:
+2. En TBC Duck Analyzer Settings:
    - Pega la URL en **"Discord Webhook URL"**
    - Haz clic en **"SAVE AND CONNECT"**
 

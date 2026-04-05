@@ -1,4 +1,4 @@
-# 🤝 Contributing to PatoChivato
+# 🤝 Contributing to TBC Duck Analyzer
 
 Thank you for your interest in contributing! This guide will help you do so.
 
