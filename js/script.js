@@ -403,6 +403,8 @@ window.onload = () => {
     });
 };
 
+
+
 function openGearModal(playerName, encounterId, className, specName) {
     const gear = (window.playerGearDB && window.playerGearDB[encounterId] && window.playerGearDB[encounterId][playerName]) ? window.playerGearDB[encounterId][playerName] : [];
     
