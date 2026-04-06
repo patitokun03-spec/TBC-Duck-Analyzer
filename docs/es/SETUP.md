@@ -180,7 +180,6 @@ Depende de tu cuota en WarcraftLogs (usualmente 100 requests/min)
 
 - 🔵 Lee el [README](../README.md)
 - 📝 Reporta un error: usa el botón **Feedback**
-- 💬 Comunidad: [Discord](https://discord.gg/patochivato) (próximamente)
 
 ---
 

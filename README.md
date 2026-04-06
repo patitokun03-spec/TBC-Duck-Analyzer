@@ -14,6 +14,7 @@
 - **[Documentación en Español](docs/es/README.md)** - Documentación completa
 - **[Guía de Configuración](docs/es/SETUP.md)** - Instrucciones paso a paso
 - **[Contribuir](docs/es/CONTRIBUTING.md)** - Cómo contribuir
+- **[Changelog](docs/es/CHANGELOG.md)** - Historial de versiones
 
 ---
 

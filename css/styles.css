@@ -32,7 +32,7 @@ button { padding: 0.6rem 1.2rem; border: none; cursor: pointer; font-weight: bol
 button:active { transform: translateY(1px); }
 
 /* --- BARRA SUPERIOR --- */
-.top-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 2rem; background: #1a1a1a; padding: 1.5rem; border-radius: 8px; border: 1px solid #333; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+.top-bar { display: flex; justify-content: center; gap: 10px; margin: 0 auto 2rem auto; max-width: fit-content; background: #1a1a1a; padding: 1.5rem; border-radius: 8px; border: 1px solid #333; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
 .top-bar input { width: 400px; font-size: 1.1rem; }
 .audit-btn { background: #f4b400; color: #111; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;}
 .audit-btn:hover { background: #ffd700; transform: scale(1.02); }
@@ -55,10 +55,10 @@ button:active { transform: translateY(1px); }
 
 /* --- LAYOUT INTERIOR DEL BOSS --- */
 .boss-content-inner { display: flex; flex-wrap: wrap; gap: 15px; align-items: flex-start; }
-.class-rows-container { flex: 1; min-width: 60%; display: flex; flex-wrap: wrap; gap: 15px; align-items: stretch; }
+.class-rows-container { flex: 1; min-width: 60%; display: flex; flex-wrap: wrap; gap: 15px; align-items: flex-start; justify-content: center; }
 
 /* --- FILAS DE CLASE --- */
-.class-row { display: flex; flex-direction: column; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); flex: 1 1 auto; min-width: 250px; }
+.class-row { display: flex; flex-direction: column; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); flex: 0 1 auto; min-width: 250px; }
 .class-header { padding: 8px 15px; font-weight: bold; text-transform: uppercase; font-size: 0.9rem; color: #111; text-shadow: 0px 1px 1px rgba(255,255,255,0.3); font-family: 'Expressway', 'Montserrat', sans-serif; letter-spacing: 1px;}
 .class-players { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 15px; background: rgba(0,0,0,0.2); flex: 1; align-items: stretch; }
 
@@ -204,6 +204,21 @@ button:active { transform: translateY(1px); }
 .custom-tooltip::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -6px; border-width: 6px; border-style: solid; border-color: #726299 transparent transparent transparent; }
 .has-tooltip:hover .custom-tooltip { visibility: visible; opacity: 1; bottom: 135%; }
 
+/* --- WOWHEAD HIDE INJECTED ICONS --- */
+/* Ocultar inyecciones inline de Wowhead en nuestros links */
+/* Ocultar inyecciones inline de Wowhead en nuestros links */
+a[data-wh-rename-link="false"] { background-image: none !important; padding-left: 0 !important; }
+a[data-wh-rename-link="false"] ins, a[data-wh-rename-link="false"] var, a[data-wh-rename-link="false"] span { display: none !important; }
+
+/* Ocultar el icono flotante del tooltip de Wowhead mediante la sugerencia de alpha 0% */
+div.wowhead-tooltip *[style*="icons/large"],
+div.wowhead-tooltip *[style*="icons/medium"],
+div.wowhead-tooltip .iconlarge,
+div.wowhead-tooltip .iconmedium {
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
 /* --- FOOTER --- */
 .app-footer {
     margin-top: 4rem;
@@ -241,6 +256,74 @@ button:active { transform: translateY(1px); }
     color: #ffd700;
     text-shadow: 0 0 10px rgba(244, 180, 0, 0.5);
 }
+
+/* --- GEAR INSPECTOR --- */
+.gear-modal-content { display: flex; gap: 20px; width: 920px; }
+.paperdoll-container { flex: 0 0 240px; position: relative; height: 435px; align-self: flex-start; background: #151515; border-radius: 8px; border: 1px solid #333; display: flex; justify-content: center; align-items: center; overflow: hidden; box-shadow: inset 0 0 30px rgba(0,0,0,0.8); }
+.paperdoll-silhouette { opacity: 0.2; height: 80%; pointer-events: none; }
+.gear-table-container { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding-right: 5px; align-items: start; overflow: visible; }
+.gear-column-left { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.gear-column-right { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+
+/* Slot positions on paperdoll */
+.gear-slot { position: absolute; width: 38px; height: 38px; background: #0a0a0a; border: 1px solid #333; border-radius: 4px; display: block; box-shadow: 0 2px 4px rgba(0,0,0,0.8); transition: 0.2s; }
+.gear-slot:hover { border-color: #f4b400; transform: scale(1.05); z-index: 10; }
+.gear-slot a { display: block; width: 100%; height: 100%; border-radius: 3px; overflow: hidden; }
+.gear-slot img.slot-icon { width: 100%; height: 100%; object-fit: cover; }
+.paperdoll-gems { position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: row !important; flex-wrap: nowrap !important; gap: 1px; pointer-events: auto; z-index: 10; }
+.paperdoll-gem-icon { width: 12px; height: 12px; border-radius: 50%; border: 1px solid #000; box-shadow: 0 1px 2px rgba(0,0,0,0.8); background: #000; display: block !important; }
+
+/* Left side slots */
+.slot-0 { top: 15px; left: 10px; } /* Head */
+.slot-1 { top: 60px; left: 10px; } /* Neck */
+.slot-2 { top: 105px; left: 10px; } /* Shoulder */
+.slot-14 { top: 150px; left: 10px; } /* Back */
+.slot-4 { top: 195px; left: 10px; } /* Chest */
+.slot-3 { top: 240px; left: 10px; } /* Shirt */
+.slot-18 { top: 285px; left: 10px; } /* Tabard */
+.slot-8 { top: 330px; left: 10px; } /* Wrist */
+
+/* Right side slots */
+.slot-9 { top: 15px; right: 10px; } /* Hands */
+.slot-5 { top: 60px; right: 10px; } /* Waist */
+.slot-6 { top: 105px; right: 10px; } /* Legs */
+.slot-7 { top: 150px; right: 10px; } /* Feet */
+.slot-10 { top: 195px; right: 10px; } /* Finger1 */
+.slot-11 { top: 240px; right: 10px; } /* Finger2 */
+.slot-12 { top: 285px; right: 10px; } /* Trinket1 */
+.slot-13 { top: 330px; right: 10px; } /* Trinket2 */
+
+/* Bottom slots */
+.slot-15 { top: 380px; left: 58px; } /* MainHand */
+.slot-16 { top: 380px; left: 101px; } /* OffHand */
+.slot-17 { top: 380px; left: 144px; } /* Ranged/Relic */
+
+/* Gear Table Rows */
+.gear-table-row { display: flex; align-items: center; padding: 2px; border: none; background: transparent; transition: 0.2s; margin-bottom: 4px; height: 42px; }
+.gear-table-row:hover { background: rgba(255,255,255,0.05); }
+
+.icon-q4 { border: 1px solid #a335ee !important; box-shadow: 0 0 4px rgba(163,53,238,0.5); }
+.icon-q3 { border: 1px solid #0070dd !important; box-shadow: 0 0 4px rgba(0,112,221,0.5); }
+.icon-q5 { border: 1px solid #ff8000 !important; box-shadow: 0 0 4px rgba(255,128,0,0.5); }
+.icon-q2 { border: 1px solid #1eff00 !important; box-shadow: 0 0 4px rgba(30,255,0,0.5); }
+
+.gear-table-icon-group { position: relative; display: flex; flex-direction: column; align-items: center; margin-right: 4px; width: 44px; height: 34px; justify-content: center; flex-shrink: 0; }
+.gear-table-icon { width: 32px; height: 32px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.8); border: 1px solid #444; }
+
+.gear-table-details { display: flex; flex-direction: column; flex: 1; justify-content: center; margin-top: 0px; height: 100%; overflow: hidden; }
+.gear-table-details a.gear-table-name { text-decoration: none !important; font-family: 'Expressway', 'Montserrat', sans-serif; font-size: 0.82rem; font-weight: bold; text-shadow: 1px 1px 0 #000; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block; line-height: 1.1; background-image: none !important; padding-left: 0 !important; pointer-events: none; }
+.gear-table-enchants { margin-top: 3px; font-size: 0.7rem; color: #2e7d32; font-weight: bold; display: block; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+
+.gear-table-gems { position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: row !important; flex-wrap: nowrap !important; gap: 1px; justify-content: center; align-items: flex-start; z-index: 5; pointer-events: auto; }
+.gear-table-gems a { display: inline-block !important; line-height: 0 !important; }
+.socket-icon { width: 12px; height: 12px; border-radius: 50%; border: 1px solid #000; box-shadow: 0 1px 2px rgba(0,0,0,0.8); display: block !important; margin: 0 !important; }
+
+.table-section-title { font-size: 0.8rem; font-weight: bold; color: #aaa; text-transform: uppercase; margin: 10px 0 5px 0; border-bottom: 1px solid #333; padding-bottom: 2px; font-family: 'Expressway', 'Montserrat', sans-serif; }
+
+/* Inspect Button */
+.inspect-btn { width: 100%; background: linear-gradient(to right, rgba(0, 123, 255, 0.1), rgba(0, 50, 150, 0.2)); border: 1px solid rgba(0, 123, 255, 0.3); color: #64b5f6; padding: 6px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; border-radius: 4px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s; font-family: 'Expressway', 'Montserrat', sans-serif; display:flex; justify-content:center; align-items:center; gap:6px; box-shadow: 0 2px 5px rgba(0,0,0,0.3);}
+.inspect-btn:hover { background: linear-gradient(to right, rgba(0, 123, 255, 0.2), rgba(0, 70, 200, 0.4)); color: white; border-color: rgba(0, 123, 255, 0.6); transform: translateY(-1px); box-shadow: 0 4px 8px rgba(0,0,0,0.4); }
+.inspect-btn:active { transform: translateY(1px); }
 
 /* --- RESPONSIVE DESIGN --- */
 @media (max-width: 768px) {

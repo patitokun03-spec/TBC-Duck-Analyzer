@@ -180,7 +180,6 @@ It depends on your quota on WarcraftLogs (usually 100 requests/min).
 
 - 🔵 Read the [README](../en/README.md)
 - 📝 Report an issue: use the **Feedback** button
-- 💬 Community: [Discord](https://discord.gg/patochivato) (coming soon)
 
 ---
 

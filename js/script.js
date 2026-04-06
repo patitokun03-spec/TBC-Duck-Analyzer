@@ -94,6 +94,12 @@ function buildEncounterHTML(fightId, events, allActors) {
             const p = allActors.find(x => x.id === ev.sourceID);
             if (!playerTempEnchants[ev.sourceID]) playerTempEnchants[ev.sourceID] = [];
             
+            if (p && ev.gear) {
+                if (!window.playerGearDB) window.playerGearDB = {};
+                if (!window.playerGearDB[fightId]) window.playerGearDB[fightId] = {};
+                window.playerGearDB[fightId][p.name] = ev.gear;
+            }
+            
             // --- DETECCIÓN DE ESPECIALIZACIÓN ---
             let playerSpec = detectPlayerSpec(p);
             
@@ -130,14 +136,9 @@ function buildEncounterHTML(fightId, events, allActors) {
                             window.playerEnchantsForConsole[p.name].add(rawEnchant);
                         }
 
-                        let foundEnchant = null;
-                        if (item.temporaryEnchant) foundEnchant = item.temporaryEnchant;
-                        else if (item.tempEnchant) foundEnchant = item.tempEnchant;
-                        if (!foundEnchant || !ENCHANT_DB[foundEnchant]) {
-                            if (item.permanentEnchant && ENCHANT_DB[item.permanentEnchant]) foundEnchant = item.permanentEnchant;
-                            else if (item.enchant && ENCHANT_DB[item.enchant]) foundEnchant = item.enchant;
+                        if (rawEnchant && ENCHANT_DB[rawEnchant]) {
+                            enchants.push(rawEnchant);
                         }
-                        if (foundEnchant) enchants.push(foundEnchant);
                     }
                 });
             }
@@ -250,7 +251,7 @@ function buildEncounterHTML(fightId, events, allActors) {
                                 info.enchants.forEach(eId => {
                                     if (ENCHANT_DB[eId]) {
                                         let enchName = ENCHANT_DB[eId].name;
-                                        if (!weaponBuffsAggregated[enchName]) weaponBuffsAggregated[enchName] = { count: 0, icon: ENCHANT_DB[eId].icon };
+                                        if (!weaponBuffsAggregated[enchName]) weaponBuffsAggregated[enchName] = { count: 0, icon: ENCHANT_DB[eId].icon || 'inv_misc_questionmark' };
                                         weaponBuffsAggregated[enchName].count += 1;
                                     }
                                 });
@@ -278,7 +279,9 @@ function buildEncounterHTML(fightId, events, allActors) {
                         let specRaw = data.specIcon || cls;
                         let specImgName = SPEC_ICONS[specRaw] || SPEC_ICONS[specRaw.split('-')[0]] || SPEC_ICONS[cls] || 'inv_misc_questionmark';
 
-                        return `<div class="player-card"><div class="player-name ${cls}-color"><img src="assets/icons/${specImgName}.jpg" class="spec-icon" onerror="this.src='assets/icons/inv_misc_questionmark.jpg'">${name}</div>${htmlBuffs ? `<div class="buff-bar">${htmlBuffs}</div>` : ''}<div class="spell-grid">${spellListHtml}</div></div>`;
+                        let gearBtnHtml = `<button class="inspect-btn" onclick="openGearModal('${name}', '${fightId}', '${cls}', '${specRaw}')">🔍 Inspect Gear</button>`;
+
+                        return `<div class="player-card"><div class="player-name ${cls}-color"><img src="assets/icons/${specImgName}.jpg" class="spec-icon" onerror="this.src='assets/icons/inv_misc_questionmark.jpg'">${name}</div>${gearBtnHtml}${htmlBuffs ? `<div class="buff-bar">${htmlBuffs}</div>` : ''}<div class="spell-grid">${spellListHtml}</div></div>`;
                     }).join('')}
                 </div>
             </div>`;
@@ -390,4 +393,171 @@ window.onload = () => {
             auditarLog();
         }
     });
+    
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            document.getElementById('gearOverlay').classList.remove('is-open');
+            document.getElementById('tutorialOverlay').classList.remove('is-open');
+            document.getElementById('settingsOverlay').classList.remove('is-open');
+        }
+    });
 };
+
+function openGearModal(playerName, encounterId, className, specName) {
+    const gear = (window.playerGearDB && window.playerGearDB[encounterId] && window.playerGearDB[encounterId][playerName]) ? window.playerGearDB[encounterId][playerName] : [];
+    
+    document.getElementById('gearModalTitle').innerHTML = `<img src="assets/icons/${SPEC_ICONS[specName] || SPEC_ICONS[specName.split('-')[0]] || SPEC_ICONS[className] || 'inv_misc_questionmark'}.jpg" class="spec-icon" style="width:24px; height:24px; vertical-align:middle; border-radius:4px; margin: 0 8px 0 0; border: 1px solid #444;" onerror="this.src='assets/icons/inv_misc_questionmark.jpg'"> <span class="${className}-color" style="text-transform: uppercase;">${playerName}</span>`;
+    
+    let paperDollHtml = '';
+    let tableHtml = '';
+    
+    if (!gear || gear.length === 0) {
+        document.getElementById('gearModalContent').innerHTML = `<p style="text-align:center; color:#aaa; padding:20px;">No gear data available for this encounter.</p>`;
+        document.getElementById('gearOverlay').classList.add('is-open');
+        return;
+    }
+
+    const groups = [
+        { title: "Armor", slots: [0, 2, 14, 4, 8, 9, 5, 6, 7] },
+        { title: "Jewelry", slots: [1, 10, 11, 12, 13] },
+        { title: "Weapons", slots: [15, 16, 17] }
+    ];
+
+    let groupHtmlMap = { "Armor": "", "Jewelry": "", "Weapons": "" };
+    
+    // Fetch all equipped item IDs for set bonus detection
+    let allGearIds = gear.filter(g => g && g.id !== 0).map(g => g.id).join(':');
+
+    // Built paperDoll slots & table rows
+    for (let i = 0; i <= 18; i++) {
+        let item = gear[i];
+        
+        if (item && item.id !== 0) {
+            let iconUrlStr = item.icon ? item.icon.replace(/\.jpg$/i, '') : '';
+            let iconUrl = iconUrlStr ? `https://wow.zamimg.com/images/wow/icons/large/${iconUrlStr}.jpg` : 'assets/icons/inv_misc_questionmark.jpg';
+            
+            // Collect gems, enchants, and set pieces for Wowhead Tooltips
+            let wowheadParams = `item=${item.id}&pcs=${allGearIds}`;
+            let gemIdsStr = '';
+            
+            // Gems using medium icon so they exist on server, we resize via CSS
+            let gemsHtml = '';
+            let gemsTableHtml = '';
+            if (item.gems && item.gems.length > 0) {
+                gemIdsStr = item.gems.map(g => g.id).join(':');
+                wowheadParams += `&gems=${gemIdsStr}`;
+                
+                item.gems.forEach(g => {
+                    let gemIconStr = g.icon ? g.icon.replace(/\.jpg$/i, '') : 'inv_misc_questionmark';
+                    gemsHtml += `<a href="https://www.wowhead.com/tbc/item=${g.id}" data-wowhead="item=${g.id}&domain=tbc" data-wh-rename-link="false" data-wh-icon-size="none" style="display:inline-block; line-height:0; border-radius:50%;"><img class="paperdoll-gem-icon" src="https://wow.zamimg.com/images/wow/icons/medium/${gemIconStr}.jpg" onerror="this.style.display='none'"></a>`;
+                    gemsTableHtml += `<a href="https://www.wowhead.com/tbc/item=${g.id}" data-wowhead="item=${g.id}&domain=tbc" data-wh-rename-link="false" data-wh-icon-size="none" style="display:inline-block; line-height:0; border-radius:50%; margin:0 1px;"><img class="socket-icon" src="https://wow.zamimg.com/images/wow/icons/medium/${gemIconStr}.jpg" onerror="this.style.display='none'"></a>`;
+                });
+            }
+            
+            // Enchants (Priorizamos encanto permanente sobre la piedra de afilar)
+            let rawEnchant = item.permanentEnchant || item.enchant || item.temporaryEnchant || item.tempEnchant;
+            let enchantHtml = '';
+            if (rawEnchant && rawEnchant !== 0) {
+                wowheadParams += `&ench=${rawEnchant}`;
+                if (ENCHANT_DB[rawEnchant]) {
+                    enchantHtml = `✨ ${ENCHANT_DB[rawEnchant].name}`;
+                } else {
+                    enchantHtml = `✨ <a href="https://www.wowhead.com/tbc/enchant=${rawEnchant}" data-wowhead="domain=tbc" style="color: #ed0; text-decoration:none; opacity: 1; pointer-events: none;">Enchant #${rawEnchant}</a>`;
+                }
+            }
+            
+            // Add domain
+            wowheadParams += `&domain=tbc`;
+
+            // Quality colors class
+            let qClass = '';
+            let iconClass = '';
+            if (item.quality === 4) { qClass = 'q-epic'; iconClass = 'icon-q4'; }
+            else if (item.quality === 3) { qClass = 'q-rare'; iconClass = 'icon-q3'; }
+            else if (item.quality === 5) { qClass = 'q-legendary'; iconClass = 'icon-q5'; }
+            else if (item.quality === 2) { qClass = 'q-uncommon'; iconClass = 'icon-q2'; }
+
+            // Paperdoll - Wait! DO NOT USE style="position:relative"! It overrides absolute and squashes them!
+            // To make sure wowhead links are positioned over the image inside the slot box properly, wrap them inside.
+            paperDollHtml += `<div class="gear-slot slot-${i}">
+                <img src="${iconUrl}" onerror="this.src='assets/icons/inv_misc_questionmark.jpg'" class="slot-icon ${iconClass}">
+                <a href="https://www.wowhead.com/tbc/item=${item.id}" data-pending-wh="${wowheadParams}" data-wh-rename-link="false" data-wh-icon-size="none" style="position:absolute; top:0; left:0; width:100%; height:100%; display:block; opacity:0; z-index:5; overflow:hidden;">Item</a>
+                <div class="paperdoll-gems">${gemsHtml}</div>
+            </div>`;
+            
+            // Generate row HTML
+            let rowHtml = `
+                <div class="gear-table-row">
+                    <div class="gear-table-icon-group">
+                        <a href="https://www.wowhead.com/tbc/item=${item.id}" data-pending-wh="${wowheadParams}" data-wh-rename-link="false" data-wh-icon-size="none" style="display:block; text-decoration:none;">
+                            <img class="gear-table-icon ${iconClass}" src="${iconUrl}" onerror="this.src='assets/icons/inv_misc_questionmark.jpg'">
+                        </a>
+                        ${gemsTableHtml ? `<div class="gear-table-gems">${gemsTableHtml.replace(/data-wowhead=/g, 'data-pending-wh=')}</div>` : ''}
+                    </div>
+                    <div class="gear-table-details">
+                        <a class="gear-table-name" href="https://www.wowhead.com/tbc/item=${item.id}" data-pending-wh="${wowheadParams}" data-wh-rename-link="true" style="background-image:none !important; padding-left:0 !important;">...</a>
+                        ${enchantHtml ? `<div class="gear-table-enchants">${enchantHtml}</div>` : ''}
+                    </div>
+                </div>`;
+            
+            // Put in correct group
+            groups.forEach(group => {
+                if(group.slots.includes(i)) groupHtmlMap[group.title] += rowHtml;
+            });
+
+        } else {
+            // Empy slots remain absolute correctly
+            paperDollHtml += `<div class="gear-slot slot-${i}" style="opacity:0.2; background: url('assets/icons/inv_misc_questionmark.jpg') center/cover;"></div>`;
+        }
+    }
+    
+    // Assemble table groups in two columns
+    tableHtml = `
+        <div class="gear-column-left">
+            <div class="table-section-title">Armor</div>
+            ${groupHtmlMap["Armor"]}
+        </div>
+        <div class="gear-column-right">
+            <div class="table-section-title">Jewelry</div>
+            ${groupHtmlMap["Jewelry"]}
+            <div class="table-section-title">Weapons</div>
+            ${groupHtmlMap["Weapons"]}
+        </div>
+    `;
+    
+    let bgIcon = SPEC_ICONS[specName] || SPEC_ICONS[specName.split('-')[0]] || SPEC_ICONS[className] || 'inv_misc_questionmark';
+
+    let contentHtml = `
+        <div class="gear-modal-content">
+            <div class="paperdoll-container" style="background: radial-gradient(circle, #2a2a2a 0%, #111 80%); border: 2px solid #222; border-radius: 12px; box-shadow: inset 0 0 40px rgba(0,0,0,0.9);">
+                <div style="position: absolute; top:15px; left:50%; transform:translateX(-50%); width:150px; height:405px; background: url('data:image/svg+xml,%3Csvg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 100 185\\'%3E%3Cpath fill=\\'%23333\\' opacity=\\'0.5\\' d=\\'M35,20 C35,10 65,10 65,20 C65,30 60,35 50,35 C40,35 35,30 35,20 Z M25,40 L75,40 L85,100 L75,100 L70,60 L60,60 L60,180 L40,180 L40,60 L30,60 L25,100 L15,100 Z\\'/%3E%3C/svg%3E') center/contain no-repeat;"></div>
+                ${paperDollHtml}
+            </div>
+            <div class="gear-table-container">
+                ${tableHtml}
+            </div>
+        </div>
+    `;
+    
+    document.getElementById('gearModalContent').innerHTML = contentHtml;
+    document.getElementById('gearOverlay').classList.add('is-open');
+    
+    // Smooth Wowhead Loading
+    // Apply links 300ms after UI renders so modal opening animation is butter smooth (0 lag)
+    setTimeout(() => {
+        let whLinks = document.getElementById('gearModalContent').querySelectorAll('[data-pending-wh]');
+        whLinks.forEach(link => {
+            link.setAttribute('data-wowhead', link.getAttribute('data-pending-wh'));
+            link.removeAttribute('data-pending-wh');
+        });
+        if (typeof $WowheadPower !== 'undefined') {
+            $WowheadPower.refreshLinks();
+        }
+    }, 300);
+}
+
+function closeGearModal() {
+    document.getElementById('gearOverlay').classList.remove('is-open');
+}
+
+

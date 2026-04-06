@@ -2,6 +2,18 @@
 
 All notable changes to TBC Duck Analyzer are documented here.
 
+## [1.1.0] - 2026-04-06
+
+### ✨ UI & Gear Inspector Redesign
+- **Complete Gear Inspector Overhaul** - Expanded layout with a clean 2-column grid.
+- **TBC Enchantment Details** - Automatic mapping of TBC Enchant IDs to readable names + localized stats.
+- **Weapon Enchant Grouping** - Permanent enchants strictly excluded from consumables tracker.
+- **Optimized Tooltips** - Deferred Wowhead tooltip loading (0 lag spike on inspect), strict CSS clipping, and prevented accidental hover on text.
+- **Refined Paperdoll** - Responsive 2D stickman SVG mathematically bound to exact slot coordinates.
+- **Hotkeys** - Added `Escape` key listener to seamlessly close all active overlays/modals.
+
+---
+
 ## [1.0.0] - 2026-04-05 - Official Release
 
 ### ✨ Features
@@ -46,38 +58,38 @@ All notable changes to TBC Duck Analyzer are documented here.
 
 **For feedback or bug reports, use the 📝 Feedback button in the app or [open an issue on GitHub](https://github.com/patitokun03-spec/TBC-Duck-Analyzer/issues)**
 
-### Fase 2: Análisis (v1.2)
-- [ ] Estadísticas por encuentro
-- [ ] Comparativa entre jugadores
-- [ ] Ranking de consumibles
-- [ ] Export a CSV/JSON
+### Phase 2: Analysis (v1.2)
+- [ ] Encounter statistics
+- [ ] Player comparisons
+- [ ] Consumables ranking
+- [ ] Export to CSV/JSON
 
-### Fase 3: Comunidad (v1.3)
-- [ ] Sistema de comentarios
-- [ ] Compartir análisis
-- [ ] Integración con Discord bot
-- [ ] Base de datos de logs públicos
-
----
-
-## Formato de Versionado
-
-Este proyecto sigue [Semantic Versioning](https://semver.org/)
-
-- **MAJOR** - Cambios incompatibles (nueva API, estrutura)
-- **MINOR** - Nuevas características (retrocompatible)
-- **PATCH** - Bugs y fixes
+### Phase 3: Community (v1.3)
+- [ ] Comment system
+- [ ] Share analysis
+- [ ] Discord bot integration
+- [ ] Public logs database
 
 ---
 
-## Cómo Reportar Cambios
+## Versioning Format
 
-Si encuentras bugs o tienes sugerencias:
-1. Abre un [GitHub Issue](https://github.com/patitokun03-spec/TBC-Duck-Analyzer/issues)
-2. O usa el botón **📝 Feedback** en la web
+This project follows [Semantic Versioning](https://semver.org/)
 
-Incluye:
-- Qué versión usas
-- Qué esperabas que pasara
-- Qué pasó en su lugar
+- **MAJOR** - Incompatible changes (new API, structure)
+- **MINOR** - New features (backwards compatible)
+- **PATCH** - Bugs and fixes
+
+---
+
+## Reporting Issues
+
+If you find bugs or have suggestions:
+1. Open a [GitHub Issue](https://github.com/patitokun03-spec/TBC-Duck-Analyzer/issues)
+2. Or use the **📝 Feedback** button on the website
+
+Please include:
+- What version you are using
+- What you expected to happen
+- What actually happened
 - Steps to reproduce

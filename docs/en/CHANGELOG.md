@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2026-04-06
+
+### ✨ UI & Gear Inspector Redesign
+- **Complete Gear Inspector Overhaul** - Expanded layout with a clean 2-column grid.
+- **TBC Enchantment Details** - Automatic mapping of TBC Enchant IDs to readable names + localized stats.
+- **Weapon Enchant Grouping** - Permanent enchants strictly excluded from consumables tracker.
+- **Optimized Tooltips** - Deferred Wowhead tooltip loading (0 lag spike on inspect), strict CSS clipping, and prevented accidental hover on text.
+- **Refined Paperdoll** - Responsive 2D stickman SVG mathematically bound to exact slot coordinates.
+- **Hotkeys** - Added `Escape` key listener to seamlessly close all active overlays/modals.
+
+---
+
 ## [1.0.0] - 2026-04-05 - OFFICIAL RELEASE
 
 ### ✨ New Features

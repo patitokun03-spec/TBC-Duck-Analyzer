@@ -2,6 +2,18 @@
 
 Todos los cambios importantes en este proyecto serán documentados en este archivo.
 
+## [1.1.0] - 2026-04-06
+
+### ✨ Rediseño del Inspector de Equipo (Gear Inspector)
+- **Overhaul Completo del Inspector** - Diseño expandido en un grid limpio de 2 columnas.
+- **Detalles de Encantamientos TBC** - Mapeo automático de IDs de encantamiento a nombres legibles y estadísticas exactas de The Burning Crusade.
+- **Agrupación de Encantamientos de Arma** - Exclusión estricta de encantamientos permanentes del rastreador de consumibles (ej: cruzado o mangosta no saldrán como elixires).
+- **Tooltips Optimizados** - Carga diferida de los tooltips de Wowhead (0 picos de lag al inspeccionar), superposición de gemas mejorada y sistema anti-hover ciego.
+- **Paperdoll Refinado** - Silueta 2D matemáticamente acoplada a las coordenadas exactas de las casillas del juego real.
+- **Atajos de Teclado** - Añadida pulsación de la tecla `Escape` para cerrar limpiamente todas las ventanas superpuestas.
+
+---
+
 ## [1.0.0] - 2026-04-05 - LANZAMIENTO OFICIAL
 
 ### ✨ Características Nuevas

@@ -237,9 +237,7 @@ All contributors will be mentioned in:
 
 ## Contact
 
-- 📧 Email: dev@patochivato.com (coming soon)
-- 💬 Discord: [Development Channel](https://discord.gg/patochivato) (coming soon)
-- 🐛 Issues: [GitHub Issues](https://github.com/patitokun03-spec/TBC-Duck-Analyzer/issues)
+Soon
 
 ---
 

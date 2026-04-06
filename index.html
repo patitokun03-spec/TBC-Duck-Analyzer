@@ -11,6 +11,8 @@
 
         gtag('config', 'G-7P3JK2357E');
     </script>
+    <script>var whTooltips = {colorLinks: true, iconizeLinks: false, renameLinks: true, domain: 'tbc', hide: {icon: true}};</script>
+    <script src="https://wow.zamimg.com/widgets/power.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
@@ -99,6 +101,19 @@
         </div>
     </div>
 
+    <!-- MODAL DE EQUIPO (PAPERDOLL) -->
+    <div class="overlay" id="gearOverlay">
+        <div class="settings-modal paperdoll-card" style="width: 1000px; max-width: 95vw;">
+            <div class="settings-header">
+                <h3 id="gearModalTitle">👕 Gear Inspector</h3>
+                <button class="close-btn" onclick="closeGearModal()">×</button>
+            </div>
+            <div class="settings-body gear-modal-body" style="padding: 1.5rem; background: #0a0a0a;">
+                <div id="gearModalContent"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div style="display: flex; justify-content: flex-end; align-items: center; gap: 10px; padding: 1rem 0;">
             <div id="loggedInUser" style="display:none; font-size: 0.95rem; color: #aaa; margin-right: 10px;">
@@ -148,33 +163,11 @@
         }
     </script>
 
-    <div id="resultados"></div>
-    </div>
-
-    <script src="js/data.js"></script>
-    <script src="js/script.js"></script>
-    <script>
-        // GitHub Feedback System
-        document.getElementById('feedbackBtn').addEventListener('click', function () {
-            const gitHubIssueUrl = 'https://github.com/patitokun03-spec/TBC-Duck-Analyzer/issues/new?labels=feedback&template=bug_report.md';
-            window.open(gitHubIssueUrl, '_blank');
-        });
-
-        // GitHub Repository Button
-        document.getElementById('githubBtn').addEventListener('click', function () {
-            window.open('https://github.com/patitokun03-spec/TBC-Duck-Analyzer', '_blank');
-        });
-
-        // Show tutorial only once
-        if (!localStorage.getItem('tutorialVisto')) {
-            setTimeout(() => openTutorial(), 1500);
-            localStorage.setItem('tutorialVisto', 'true');
-        }
-    </script>
+    <!-- Removed duplicate script tags -->
 
     <footer class="app-footer">
         <div class="footer-content">
-            <p>TBC Duck Analyzer © 2026 | <a href="https://github.com/patitokun03-spec/TBC-Duck-Analyzer"
+            <p>TBC Duck Analyzer v1.1 © 2026 | <a href="https://github.com/patitokun03-spec/TBC-Duck-Analyzer"
                     target="_blank">Open Source on GitHub</a></p>
             <p style="font-size: 0.85rem; color: #888;">WoW TBC Log Analyzer | Made for the community</p>
         </div>

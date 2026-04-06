@@ -2,7 +2,7 @@
 
 A professional tool to analyze **World of Warcraft TBC** combat logs from **WarcraftLogs**, displaying consumables, buffs, interrupt abilities, and racial abilities per player.
 
-![Version](https://img.shields.io/badge/Version-1.0.0-blue)
+![Version](https://img.shields.io/badge/Version-1.1.0-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 ## ✨ Features
