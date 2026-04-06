@@ -211,6 +211,7 @@ a[data-wh-rename-link="false"] { background-image: none !important; padding-left
 a[data-wh-rename-link="false"] ins, a[data-wh-rename-link="false"] var, a[data-wh-rename-link="false"] span { display: none !important; }
 
 /* Ocultar el icono flotante del tooltip de Wowhead mediante la sugerencia de alpha 0% */
+div.wowhead-tooltip { pointer-events: none !important; }
 div.wowhead-tooltip *[style*="icons/large"],
 div.wowhead-tooltip *[style*="icons/medium"],
 div.wowhead-tooltip .iconlarge,
@@ -311,7 +312,7 @@ div.wowhead-tooltip .iconmedium {
 .gear-table-icon { width: 32px; height: 32px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.8); border: 1px solid #444; }
 
 .gear-table-details { display: flex; flex-direction: column; flex: 1; justify-content: center; margin-top: 0px; height: 100%; overflow: hidden; }
-.gear-table-details a.gear-table-name { text-decoration: none !important; font-family: 'Expressway', 'Montserrat', sans-serif; font-size: 0.82rem; font-weight: bold; text-shadow: 1px 1px 0 #000; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block; line-height: 1.1; background-image: none !important; padding-left: 0 !important; pointer-events: none; }
+.gear-table-details a.gear-table-name { text-decoration: none !important; font-family: 'Expressway', 'Montserrat', sans-serif; font-size: 0.82rem; font-weight: bold; text-shadow: 1px 1px 0 #000; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block; line-height: 1.1; background-image: none !important; padding-left: 0 !important; pointer-events: auto; }
 .gear-table-enchants { margin-top: 3px; font-size: 0.7rem; color: #2e7d32; font-weight: bold; display: block; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
 
 .gear-table-gems { position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: row !important; flex-wrap: nowrap !important; gap: 1px; justify-content: center; align-items: flex-start; z-index: 5; pointer-events: auto; }

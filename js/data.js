@@ -192,6 +192,7 @@ const ENCHANT_DB = {
     2992: { name: "Inscription of the Oracle (+5 MP5)" },
     2990: { name: "Inscription of the Knight (+13 Def)" },
     2939: { name: "Cat Swiftness (+6 Agi, Minor Speed)" },
+    2605: { name: "Zandalar Signet of Mojo (+18 Spell)" },
 };
 
 const SPELL_DB = {

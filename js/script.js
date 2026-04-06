@@ -492,7 +492,6 @@ function openGearModal(playerName, encounterId, className, specName) {
                         <a href="https://www.wowhead.com/tbc/item=${item.id}" data-pending-wh="${wowheadParams}" data-wh-rename-link="false" data-wh-icon-size="none" style="display:block; text-decoration:none;">
                             <img class="gear-table-icon ${iconClass}" src="${iconUrl}" onerror="this.src='assets/icons/inv_misc_questionmark.jpg'">
                         </a>
-                        ${gemsTableHtml ? `<div class="gear-table-gems">${gemsTableHtml.replace(/data-wowhead=/g, 'data-pending-wh=')}</div>` : ''}
                     </div>
                     <div class="gear-table-details">
                         <a class="gear-table-name" href="https://www.wowhead.com/tbc/item=${item.id}" data-pending-wh="${wowheadParams}" data-wh-rename-link="true" style="background-image:none !important; padding-left:0 !important;">...</a>
