@@ -38,3 +38,5 @@ build/
 .env.local
 *.key
 credentials.json
+# Script de pruebas local
+test.js
