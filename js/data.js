@@ -124,12 +124,13 @@ const ENCHANT_DB = {
     2713: { name: "Adamantite Sharpening Stone", icon: "inv_stone_sharpeningstone_07" },
     2714: { name: "Adamantite Sharpening Stone", icon: "inv_stone_sharpeningstone_07" },
     34340: { name: "Adamantite Sharpening Stone", icon: "inv_stone_sharpeningstone_07" },
-    2724: { name: "Adamantite Weightstone", icon: "inv_stone_weightstone_07" },
     2723: { name: "Scope (+28 Crit)", icon: "inv_stone_weightstone_07" },
     2955: { name: "Adamantite Weightstone", icon: "inv_stone_weightstone_07" },
     2506: { name: "Dense Sharpening Stone", icon: "inv_stone_02" },
 
     // Enchants
+    2523: { name: "Biznicks Scope (+30 Hit Rating)" },
+    2724: { name: "Stabilitzed Eternium Scope (+28 Crit)" },
     2670: { name: "Major Agility (+35 Agi)", icon: "inv_stone_weightstone_07" },
     3001: { name: "Glyph of Renewal (+35 Heal, 12 SP, 7 MP5)" },
     2980: { name: "Gr. Inscription of Faith (+33 Heal, 11 SP, 4 MP5)" },
@@ -162,7 +163,7 @@ const ENCHANT_DB = {
     2614: { name: "Shadowpower (+20 Shadow SP)" },
     2621: { name: "Subtlety" },
     2672: { name: "Soulfrost" },
-    2564: { name: "Major Agility (+16 Agi)" },
+    2564: { name: "Major Agility (+15 Agi)" },
     1583: { name: "Superior Striking (+24 AP)" },
     2669: { name: "Major Spellpower (+40 SP)" },
     2997: { name: "Inscription of Vengeance (+20 AP & 15 Crit)" },
@@ -196,6 +197,11 @@ const ENCHANT_DB = {
     2999: { name: "Glyph of the Defender (+16 Defense, +17 Dodge)" },
     2978: { name: "Glyph Inscription of Warding (+15 Dodge, +10 Defense)" },
     2935: { name: "Spell Strike (+15 Spell Hit)" },
+    2934: { name: "Blasting (+10 Spell Crit)" },
+    1888: { name: "Greater Resistance (+5 All Resistance)" },
+    929: { name: "Greater Stamina (+7 Stamina)" },
+    3013: { name: "Nethercleft Leg Armor (+40 Stamina & 12 Agi)" },
+    2929: { name: "Striking (+2 Weapon Dmg)" },
 };
 
 const SPELL_DB = {
