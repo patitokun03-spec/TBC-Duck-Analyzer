@@ -193,6 +193,9 @@ const ENCHANT_DB = {
     2990: { name: "Inscription of the Knight (+13 Def)" },
     2939: { name: "Cat Swiftness (+6 Agi, Minor Speed)" },
     2605: { name: "Zandalar Signet of Mojo (+18 Spell)" },
+    2999: { name: "Glyph of the Defender (+16 Defense, +17 Dodge)" },
+    2978: { name: "Glyph Inscription of Warding (+15 Dodge, +10 Defense)" },
+    2936: { name: "Spell Strike (+15 Spell Hit)" },
 };
 
 const SPELL_DB = {
