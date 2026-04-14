@@ -2,6 +2,23 @@
 
 Todos los cambios importantes en este proyecto serán documentados en este archivo.
 
+## [1.2.0] - 2026-04-14
+
+### ✨ Migración Full-Stack y Arquitectura
+- **Integración Node.js** - Migración a un entorno backend Node.js (`server.js`) sustituyendo la mera lógica de configuración estática.
+- **Proxy Local para Iconos** - El servidor ahora intercepta, cachea y sirve de forma limpia los iconos de Wowhead a través de puntos `/api/icon/`, reduciendo drásticamente los tiempos de carga.
+- **Integración con Base de Datos SQLite** - Integración directa del sistema `logs_cache` en el backend para una consulta persistente e independiente.
+- **Soporte Docker** - La aplicación se puede lanzar unificadamente en entornos locales y cloud mediante `Dockerfile` y `docker-compose.yml`.
+
+### 🐛 Soluciones Lógicas y del Inspector de Equipo
+- **Matriz Estricta de Encantamientos** - Reescritura del código `isEnchantable` priorizando los SlotIDs 1-19 reales mapeados de la API de WoW. Elimina falsos negativos de falta de enchants en Collar, Cintura, Camisas, Tabardo, y Ranged.
+- **Lógica de Prioridad de Encantamiento** - El aviso "❌ Slacking" respeta ahora estrictamente la omisión de enchants temporales como aceites y piedras si carece de encantamiento permanente.
+- **Validación de Armas Off-hand** - Añadida regla de refinamiento sobre armas off-hand (Slot 17). Los encantamientos exigen ahora que el ítem sea escudo o arma, eximiendo a los simples objetos de clase "held in off-hand".
+- **Perfección del Grid UI** - Desincronización de márgenes flexbox superada; el marco del paperdoll y la etiqueta "ARMOR" gozan de una sincronización vertical limpia.
+- **Debugs de Consola** - Añadidos de logs para desarrolladores embebidos sobre un ciclo mapping the exact equipment state into array.
+
+---
+
 ## [1.1.0] - 2026-04-06
 
 ### ✨ Rediseño del Inspector de Equipo (Gear Inspector)

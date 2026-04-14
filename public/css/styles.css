@@ -1,0 +1,1418 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
+
+body {
+    background: #111;
+    color: #eee;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    padding: 1rem 2rem;
+    margin: 0;
+}
+
+.container {
+    max-width: 1400px;
+    margin: auto;
+}
+
+/* --- LOGO NEON --- */
+.logo-container {
+    text-align: center;
+    padding: 20px 0 45px 0;
+}
+
+h1 {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 2.8rem;
+    margin: 0;
+    font-weight: 900;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    display: inline-block;
+    position: relative;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.6), 0 0 10px rgba(244, 180, 0, 0.4);
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: -10%;
+    width: 120%;
+    height: 4px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #f4b400, 0 0 42px #f4b400, 0 0 60px #f4b400;
+    animation: flickerBar 4s infinite alternate;
+}
+
+@keyframes flickerBar {
+
+    0%,
+    18%,
+    22%,
+    25%,
+    53%,
+    57%,
+    100% {
+        box-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #f4b400, 0 0 42px #f4b400, 0 0 60px #f4b400;
+    }
+
+    20%,
+    24%,
+    55% {
+        box-shadow: 0 0 2px #fff;
+        opacity: 0.8;
+    }
+}
+
+input {
+    padding: 0.6rem 1rem;
+    background: #1a1a1a;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 4px;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #f4b400;
+    outline: none;
+    box-shadow: 0 0 8px rgba(244, 180, 0, 0.3);
+}
+
+button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 4px;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    transition: 0.2s;
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+/* --- BARRA SUPERIOR --- */
+.top-bar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 auto 2rem auto;
+    max-width: fit-content;
+    background: #1a1a1a;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #333;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.top-bar input {
+    width: 400px;
+    font-size: 1.1rem;
+}
+
+.audit-btn {
+    background: #f4b400;
+    color: #111;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.audit-btn:hover {
+    background: #ffd700;
+    transform: scale(1.02);
+}
+
+/* --- SISTEMA DE PESTAÑAS --- */
+.encounter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.tab-btn {
+    background: #222;
+    color: #aaa;
+    border: 1px solid #444;
+    font-size: 1rem;
+    padding: 10px 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tab-btn:hover {
+    filter: brightness(1.3);
+}
+
+.tab-btn.overall {
+    border-color: #0d47a1;
+    color: #64b5f6;
+}
+
+.tab-btn.kill {
+    border-color: #1b5e20;
+    color: #81c784;
+}
+
+.tab-btn.wipe {
+    border-color: #b71c1c;
+    color: #e57373;
+}
+
+.tab-btn.active {
+    transform: scale(1.05);
+    color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    z-index: 10;
+}
+
+.tab-btn.overall.active {
+    background: #0d47a1;
+    border-color: #1565c0;
+}
+
+.tab-btn.kill.active {
+    background: #1b5e20;
+    border-color: #2e7d32;
+}
+
+.tab-btn.wipe.active {
+    background: #b71c1c;
+    border-color: #c62828;
+}
+
+.encounter-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.encounter-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- LAYOUT INTERIOR DEL BOSS --- */
+.boss-content-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.class-rows-container {
+    flex: 1;
+    min-width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* --- FILAS DE CLASE --- */
+.class-row {
+    display: flex;
+    flex-direction: column;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    flex: 0 1 auto;
+    width: max-content;
+    min-width: 250px;
+}
+
+.class-header {
+    padding: 8px 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    color: #111;
+    text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.3);
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    letter-spacing: 1px;
+}
+
+.class-players {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    flex: 1;
+    align-items: stretch;
+}
+
+/* Tarjeta de Jugador */
+.player-card {
+    display: flex;
+    flex-direction: column;
+    background: #1f1f1f;
+    border-radius: 6px;
+    padding: 12px;
+    min-width: 160px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: 0.2s;
+}
+
+.player-card:hover {
+    border-color: rgba(244, 180, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+.player-name {
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    font-weight: bold;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 6px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.spec-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* =========================================
+   ESTILO: CONTADORES DE CONSUMIBLES
+   ========================================= */
+.buff-bar {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 15px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.buff-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 36px !important;
+    margin: 0 4px !important;
+}
+
+.buff-icon {
+    width: 26px !important;
+    height: 26px !important;
+    border-radius: 4px !important;
+    border: 1px solid #444;
+    display: block !important;
+    margin: 0 auto !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.weapon-enchant {
+    border-color: #f4b400 !important;
+    box-shadow: 0 0 5px rgba(244, 180, 0, 0.8) !important;
+}
+
+.buff-ratio {
+    position: static !important;
+    display: block !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin-top: 5px !important;
+    font-size: 0.8rem !important;
+    font-weight: 900 !important;
+    color: #ffcc00 !important;
+    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000 !important;
+    font-style: italic !important;
+    line-height: 1 !important;
+    background: none !important;
+    padding: 0 !important;
+    font-family: 'Expressway', 'Montserrat', sans-serif !important;
+}
+
+.spell-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.spell-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 48px;
+    margin-bottom: 5px;
+}
+
+.spell-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.spell-name {
+    font-size: 0.65rem;
+    text-align: center;
+    margin-top: 5px;
+    color: #ccc;
+    max-width: 55px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+}
+
+.spell-count {
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-top: 3px;
+    color: #f4b400;
+    font-family: 'Expressway', 'Montserrat', sans-serif !important;
+    text-shadow: 1px 1px 0 #000;
+}
+
+.spell-damage {
+    font-size: 0.75rem;
+    color: #ff5252;
+    font-weight: bold;
+    margin-top: 2px;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    text-shadow: 1px 1px 0 #000;
+}
+
+/* --- LEADERBOARD DE MECÁNICAS --- */
+.mechanics-sidebar {
+    width: 280px;
+    flex-shrink: 0;
+}
+
+.mech-box {
+    border: 1px solid #ff5252;
+    background: #1f1f1f;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+.mech-header {
+    background: rgba(255, 82, 82, 0.2);
+    color: #ff5252;
+    padding: 12px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #ff5252;
+    font-size: 1rem;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.mech-body {
+    padding: 10px;
+    display: flex;
+    background: #151515;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.mech-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: #1d1d1d;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    border-left: 3px solid transparent;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.mech-row:nth-child(1) {
+    border-left-color: #ffd700;
+    background: rgba(255, 215, 0, 0.05);
+}
+
+.mech-row:nth-child(2) {
+    border-left-color: #c0c0c0;
+    background: rgba(192, 192, 192, 0.05);
+}
+
+.mech-row:nth-child(3) {
+    border-left-color: #cd7f32;
+    background: rgba(205, 127, 50, 0.05);
+}
+
+.medal {
+    margin-right: 8px;
+    font-size: 1.1rem;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+/* --- COLORES CLASES --- */
+.Warrior-row {
+    background: rgba(199, 156, 110, 0.08);
+    border-color: rgba(199, 156, 110, 0.3);
+}
+
+.Warrior-header {
+    background: #C79C6E;
+    color: #111;
+}
+
+.Warrior-color {
+    color: #C79C6E;
+}
+
+.Paladin-row {
+    background: rgba(245, 140, 186, 0.08);
+    border-color: rgba(245, 140, 186, 0.3);
+}
+
+.Paladin-header {
+    background: #F58CBA;
+    color: #111;
+}
+
+.Paladin-color {
+    color: #F58CBA;
+}
+
+.Hunter-row {
+    background: rgba(171, 212, 115, 0.08);
+    border-color: rgba(171, 212, 115, 0.3);
+}
+
+.Hunter-header {
+    background: #ABD473;
+    color: #111;
+}
+
+.Hunter-color {
+    color: #ABD473;
+}
+
+.Rogue-row {
+    background: rgba(255, 245, 105, 0.08);
+    border-color: rgba(255, 245, 105, 0.3);
+}
+
+.Rogue-header {
+    background: #FFF569;
+    color: #111;
+}
+
+.Rogue-color {
+    color: #FFF569;
+}
+
+.Priest-row {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.Priest-header {
+    background: #FFFFFF;
+    color: #111;
+}
+
+.Priest-color {
+    color: #FFFFFF;
+}
+
+.Shaman-row {
+    background: rgba(0, 112, 222, 0.08);
+    border-color: rgba(0, 112, 222, 0.3);
+}
+
+.Shaman-header {
+    background: #0070DE;
+    color: white;
+}
+
+.Shaman-color {
+    color: #0070DE;
+}
+
+.Mage-row {
+    background: rgba(105, 204, 240, 0.08);
+    border-color: rgba(105, 204, 240, 0.3);
+}
+
+.Mage-header {
+    background: #69CCF0;
+    color: #111;
+}
+
+.Mage-color {
+    color: #69CCF0;
+}
+
+.Warlock-row {
+    background: rgba(148, 130, 201, 0.08);
+    border-color: rgba(148, 130, 201, 0.3);
+}
+
+.Warlock-header {
+    background: #9482C9;
+    color: white;
+}
+
+.Warlock-color {
+    color: #9482C9;
+}
+
+.Druid-row {
+    background: rgba(255, 125, 10, 0.08);
+    border-color: rgba(255, 125, 10, 0.3);
+}
+
+.Druid-header {
+    background: #FF7D0A;
+    color: #111;
+}
+
+.Druid-color {
+    color: #FF7D0A;
+}
+
+/* FEEDBACK BUTTON */
+.feedback-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    padding: 12px 18px;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4), 0 0 20px rgba(0, 123, 255, 0.2);
+    z-index: 999;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.feedback-btn:hover {
+    background: linear-gradient(135deg, #0056b3, #003d82);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.6), 0 0 30px rgba(0, 123, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.feedback-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.4);
+}
+
+/* GITHUB BUTTON */
+.github-btn {
+    position: fixed;
+    bottom: 90px;
+    right: 25px;
+    padding: 12px 18px;
+    background: linear-gradient(135deg, #1f6feb, #0969da);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(31, 110, 251, 0.4), 0 0 20px rgba(31, 110, 251, 0.2);
+    z-index: 999;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.github-btn:hover {
+    background: linear-gradient(135deg, #0969da, #0860ca);
+    box-shadow: 0 6px 20px rgba(31, 110, 251, 0.6), 0 0 30px rgba(31, 110, 251, 0.4);
+    transform: translateY(-2px);
+}
+
+.github-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(31, 110, 251, 0.4);
+}
+
+/* MODAL CONFIGURACION REDISEÑADO PRO */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.overlay.is-open {
+    display: flex;
+}
+
+.settings-modal {
+    background: #111;
+    width: 480px;
+    border-radius: 12px;
+    border: 1px solid #333;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+    overflow: hidden;
+    animation: modalSlideDown 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.settings-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #222;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, #1a1a1a, #111);
+}
+
+.settings-header h3 {
+    margin: 0;
+    margin-bottom: 10px;
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #f4b400;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.3rem;
+}
+
+.close-btn {
+    background: none;
+    color: #666;
+    font-size: 2rem;
+    padding: 0;
+    margin-left: auto;
+    margin-right: 15px;
+    margin-top: 10px;
+    line-height: 1;
+    transition: 0.2s;
+}
+
+.close-btn:hover {
+    color: #ff5252;
+    transform: scale(1.1);
+}
+
+.settings-body {
+    padding: 2rem;
+    background: #0f0f0f;
+}
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #ccc;
+    font-size: 0.85rem;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+}
+
+.input-group input {
+    width: 100%;
+    background: #0a0a0a;
+    border: 1px solid #333;
+    color: white;
+    padding: 12px;
+    border-radius: 6px;
+    outline: none;
+    transition: 0.3s;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+}
+
+.input-group input:focus {
+    border-color: #f4b400;
+    box-shadow: 0 0 8px rgba(244, 180, 0, 0.2);
+}
+
+.settings-footer {
+    padding: 1.5rem;
+    border-top: 1px solid #222;
+    text-align: right;
+    background: #151515;
+}
+
+.save-btn {
+    background: #2e7d32;
+    color: white;
+    width: 100%;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+.save-btn:hover {
+    background: #388e3c;
+    box-shadow: 0 0 15px rgba(46, 125, 50, 0.6);
+}
+
+.cog-btn {
+    background: #222;
+    color: #aaa;
+    border: 1px solid #444;
+    font-size: 0.9rem;
+    padding: 8px 14px;
+}
+
+.cog-btn:hover {
+    background: #333;
+    color: white;
+    border-color: #f4b400;
+}
+
+/* Clases dinámicas de Validación de Input */
+.input-valid {
+    border-color: #4caf50 !important;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3) !important;
+}
+
+.input-invalid {
+    border-color: #ff5252 !important;
+    box-shadow: 0 0 5px rgba(255, 82, 82, 0.3) !important;
+}
+
+/* --- TOOLTIPS PERSONALIZADOS --- */
+.has-tooltip {
+    position: relative;
+    cursor: help;
+}
+
+.custom-tooltip {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #23232b;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border: 1px solid #726299;
+    z-index: 100;
+    white-space: nowrap;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+    transition: opacity 0.2s ease, bottom 0.2s ease;
+    pointer-events: none;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+}
+
+.custom-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -6px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: #726299 transparent transparent transparent;
+}
+
+.has-tooltip:hover .custom-tooltip {
+    visibility: visible;
+    opacity: 1;
+    bottom: 135%;
+}
+
+/* --- WOWHEAD HIDE INJECTED ICONS --- */
+/* Ocultar inyecciones inline de Wowhead en nuestros links */
+/* Ocultar inyecciones inline de Wowhead en nuestros links */
+a[data-wh-rename-link="false"] {
+    background-image: none !important;
+    padding-left: 0 !important;
+}
+
+a[data-wh-rename-link="false"] ins,
+a[data-wh-rename-link="false"] var,
+a[data-wh-rename-link="false"] span {
+    display: none !important;
+}
+
+/* Ocultar el icono flotante del tooltip de Wowhead mediante la sugerencia de alpha 0% */
+div.wowhead-tooltip {
+    pointer-events: none !important;
+}
+
+div.wowhead-tooltip *[style*="icons/large"],
+div.wowhead-tooltip *[style*="icons/medium"],
+div.wowhead-tooltip .iconlarge,
+div.wowhead-tooltip .iconmedium {
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* --- FOOTER --- */
+.app-footer {
+    margin-top: 4rem;
+    margin-left: -2rem;
+    margin-right: -2rem;
+    margin-bottom: -1rem;
+    padding: 2rem;
+    text-align: center;
+    background: linear-gradient(to bottom, rgba(20, 20, 20, 0.5), #111);
+    border-top: 1px solid rgba(244, 180, 0, 0.2);
+    color: #aaa;
+    font-size: 0.95rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-content p {
+    margin: 8px 0;
+}
+
+.footer-content a {
+    color: #f4b400;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.footer-content a:hover {
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(244, 180, 0, 0.5);
+}
+
+/* --- GEAR INSPECTOR --- */
+.gear-modal-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    width: 920px;
+}
+
+.paperdoll-container {
+    flex: 0 0 240px;
+    position: relative;
+    height: 435px;
+    margin-top: 18px;
+    /* Ajuste preciso para alinear titulo ARMOR */
+    padding-top: 0;
+    align-self: flex-start;
+    background: #151515;
+    border-radius: 8px;
+    border: 1px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+}
+
+.paperdoll-silhouette {
+    opacity: 0.2;
+    height: 80%;
+    pointer-events: none;
+}
+
+.gear-table-container {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding-right: 5px;
+    align-items: start;
+    overflow: visible;
+}
+
+.gear-column-left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.gear-column-right {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+/* Slot positions on paperdoll */
+.gear-slot {
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    background: #0a0a0a;
+    border: 1px solid #333;
+    border-radius: 4px;
+    display: block;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    transition: 0.2s;
+}
+
+.gear-slot:hover {
+    border-color: #f4b400;
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+.gear-slot a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.gear-slot img.slot-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-size: cover;
+    min-width: 100%;
+    min-height: 100%;
+    display: block;
+}
+
+.paperdoll-gems {
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 1px;
+    pointer-events: auto;
+    z-index: 10;
+}
+
+.paperdoll-gem-icon {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid #000;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    background: #000;
+    display: block !important;
+}
+
+/* Left side slots */
+.slot-0 {
+    top: 15px;
+    left: 10px;
+}
+
+/* Head */
+.slot-1 {
+    top: 60px;
+    left: 10px;
+}
+
+/* Neck */
+.slot-2 {
+    top: 105px;
+    left: 10px;
+}
+
+/* Shoulder */
+.slot-14 {
+    top: 150px;
+    left: 10px;
+}
+
+/* Back */
+.slot-4 {
+    top: 195px;
+    left: 10px;
+}
+
+/* Chest */
+.slot-3 {
+    top: 240px;
+    left: 10px;
+}
+
+/* Shirt */
+.slot-18 {
+    top: 285px;
+    left: 10px;
+}
+
+/* Tabard */
+.slot-8 {
+    top: 330px;
+    left: 10px;
+}
+
+/* Wrist */
+
+/* Right side slots */
+.slot-9 {
+    top: 15px;
+    right: 10px;
+}
+
+/* Hands */
+.slot-5 {
+    top: 60px;
+    right: 10px;
+}
+
+/* Waist */
+.slot-6 {
+    top: 105px;
+    right: 10px;
+}
+
+/* Legs */
+.slot-7 {
+    top: 150px;
+    right: 10px;
+}
+
+/* Feet */
+.slot-10 {
+    top: 195px;
+    right: 10px;
+}
+
+/* Finger1 */
+.slot-11 {
+    top: 240px;
+    right: 10px;
+}
+
+/* Finger2 */
+.slot-12 {
+    top: 285px;
+    right: 10px;
+}
+
+/* Trinket1 */
+.slot-13 {
+    top: 330px;
+    right: 10px;
+}
+
+/* Trinket2 */
+
+/* Bottom slots */
+.slot-15 {
+    top: 380px;
+    left: 58px;
+}
+
+/* MainHand */
+.slot-16 {
+    top: 380px;
+    left: 101px;
+}
+
+/* OffHand */
+.slot-17 {
+    top: 380px;
+    left: 144px;
+}
+
+/* Ranged/Relic */
+
+/* Gear Table Rows */
+.gear-table-row {
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    border: none;
+    background: transparent;
+    transition: 0.2s;
+    margin-bottom: 4px;
+    height: 42px;
+}
+
+.gear-table-row:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.icon-q4 {
+    border: 1px solid #a335ee !important;
+    box-shadow: 0 0 4px rgba(163, 53, 238, 0.5);
+}
+
+.icon-q3 {
+    border: 1px solid #0070dd !important;
+    box-shadow: 0 0 4px rgba(0, 112, 221, 0.5);
+}
+
+.icon-q5 {
+    border: 1px solid #ff8000 !important;
+    box-shadow: 0 0 4px rgba(255, 128, 0, 0.5);
+}
+
+.icon-q2 {
+    border: 1px solid #1eff00 !important;
+    box-shadow: 0 0 4px rgba(30, 255, 0, 0.5);
+}
+
+.gear-table-icon-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 4px;
+    width: 44px;
+    height: 34px;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.gear-table-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    border: 1px solid #444;
+}
+
+.gear-table-details {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    margin-top: 0px;
+    height: 100%;
+    overflow: hidden;
+}
+
+.gear-table-details a.gear-table-name {
+    text-decoration: none !important;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    font-size: 0.82rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #000;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+    line-height: 1.1;
+    background-image: none !important;
+    padding-left: 0 !important;
+    pointer-events: auto;
+}
+
+.gear-table-enchants {
+    margin-top: 3px;
+    font-size: 0.7rem;
+    color: #2e7d32;
+    font-weight: bold;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.gear-table-gems {
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 1px;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 5;
+    pointer-events: auto;
+}
+
+.gear-table-gems a {
+    display: inline-block !important;
+    line-height: 0 !important;
+}
+
+.socket-icon {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid #000;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    display: block !important;
+    margin: 0 !important;
+}
+
+.table-section-title {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #aaa;
+    text-transform: uppercase;
+    margin: 0 0 5px 0;
+    padding-top: 0;
+    border-bottom: 2px solid #222;
+    padding-bottom: 2px;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+}
+
+.table-section-title:first-child {
+    margin-top: 0;
+}
+
+/* Inspect Button */
+.inspect-btn {
+    width: 100%;
+    background: linear-gradient(to right, rgba(0, 123, 255, 0.1), rgba(0, 50, 150, 0.2));
+    border: 1px solid rgba(0, 123, 255, 0.3);
+    color: #64b5f6;
+    padding: 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.inspect-btn:hover {
+    background: linear-gradient(to right, rgba(0, 123, 255, 0.2), rgba(0, 70, 200, 0.4));
+    color: white;
+    border-color: rgba(0, 123, 255, 0.6);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.inspect-btn:active {
+    transform: translateY(1px);
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+    body {
+        padding: 0.5rem 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+    }
+
+    .top-bar {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .top-bar input {
+        width: 100%;
+    }
+
+    .audit-btn {
+        width: 100%;
+    }
+
+    #btnDiscord {
+        width: 100% !important;
+    }
+
+    .github-btn,
+    .feedback-btn {
+        bottom: auto;
+        top: 10px;
+        position: absolute;
+        right: 10px;
+    }
+
+    .github-btn {
+        right: 90px;
+    }
+
+    .mechanics-sidebar {
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .player-card {
+        min-width: 140px;
+    }
+
+    .encounter-tabs {
+        gap: 5px;
+    }
+
+    .tab-btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+}

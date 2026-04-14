@@ -2,6 +2,23 @@
 
 All notable changes to TBC Duck Analyzer are documented here.
 
+## [1.2.0] - 2026-04-14
+
+### ✨ Full-Stack Migration & Architecture
+- **Node.js Integration** - Migrated to a Node.js express backend environment (`server.js`) replacing pure static configuration logic.
+- **Local Proxy for Assets** - Server now intelligently intercepts, caches, and serves Wowhead icons via `/api/icon/` endpoints to radically reduce load times and bandwidth.
+- **SQLite Database Integration** - Integrated `logs_cache` system directly into backend for persistent querying.
+- **Docker Support** - Packaged backend application using `Dockerfile` and `docker-compose.yml` for unified, consistent local testing and cloud environment rollouts.
+
+### 🐛 Gear Inspector & Logic Fixes
+- **Strict Enchant Validation Matrix** - Re-engineered enchantment tracking matrix. Prevents false-negative warnings on Neck, Shirt, Waist, Rings, Trinkets, and Ranged.
+- **Enchant Priority Logic** - "❌ Slacking" warning now accurately respects the precedence of permanent enchants over temporary enchantments like oils or stones.
+- **Off-hand Weapon Validation** - Reworked rules conditionally targeting item sub-types. Enchants strictly validated only when dealing with genuine shields or standard weapons.
+- **UI Grid Perfection** - Addressed flexbox margin desyncs linking paperdoll spacing cleanly with armor container titles.
+- **Console Debugs** - Silent debugging logs injected directly within iteration loop mapping exact equipment metadata visually.
+
+---
+
 ## [1.1.0] - 2026-04-06
 
 ### ✨ UI & Gear Inspector Redesign

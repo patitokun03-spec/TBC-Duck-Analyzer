@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tbc_duck_analyzer_backend
+    restart: unless-stopped
+    ports:
+      - "456:3000"
+    environment:
+      - PORT=3000
+    networks:
+      - npm
+
+networks:
+  npm:
+    external: true
