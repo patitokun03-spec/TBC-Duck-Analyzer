@@ -20,11 +20,11 @@ db.run(`CREATE TABLE IF NOT EXISTS logs_cache (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 )`);
 
-function cleanOldLogs() {
-    db.run("DELETE FROM logs_cache WHERE created_at <= datetime('now', '-12 hours')");
+function cleanupDatabase() {
+    db.run("DELETE FROM logs_cache WHERE created_at < DATETIME('now', '-2 hours')");
 }
-cleanOldLogs();
-setInterval(cleanOldLogs, 3600000);
+cleanupDatabase();
+setInterval(cleanupDatabase, 15 * 60 * 1000); // Se ejecuta cada 15 minutos
 
 // Middleware
 app.use(cors());

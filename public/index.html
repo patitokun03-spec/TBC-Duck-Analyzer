@@ -11,7 +11,7 @@
 
         gtag('config', 'G-7P3JK2357E');
     </script>
-    <script>var whTooltips = {colorLinks: true, iconizeLinks: false, renameLinks: true, domain: 'tbc', hide: {icon: true}};</script>
+    <script>var whTooltips = { colorLinks: true, iconizeLinks: false, renameLinks: true, domain: 'tbc', hide: { icon: true } };</script>
     <script src="https://wow.zamimg.com/widgets/power.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,7 +59,8 @@
         <div class="settings-modal" style="width: 400px; max-width: 95vw;">
             <div class="settings-header">
                 <h3>💬 Discord Webhook</h3>
-                <button class="close-btn" onclick="document.getElementById('discordOverlay').classList.remove('is-open')">×</button>
+                <button class="close-btn"
+                    onclick="document.getElementById('discordOverlay').classList.remove('is-open')">×</button>
             </div>
             <div class="settings-body" style="padding: 1.5rem;">
                 <div class="input-group">
@@ -67,9 +68,14 @@
                     <input type="text" id="discordWebhookInput" placeholder="https://discord.com/api/webhooks/...">
                 </div>
             </div>
-            <div class="settings-footer" style="display: flex; gap: 10px; flex-direction: row; justify-content: space-between;">
-                <button class="close-btn" style="flex: 1; padding: 10px; background: #333; color: white; border-radius: 6px; font-size: 1rem; border: none; cursor: pointer;" onclick="document.getElementById('discordOverlay').classList.remove('is-open')">Cancel</button>
-                <button class="save-btn" style="flex: 1; background: #5865F2; padding: 10px; border-radius: 6px; font-size: 1rem; border: none; cursor: pointer;" onclick="procesarDiscordWebhook()">Save & Send</button>
+            <div class="settings-footer"
+                style="display: flex; gap: 10px; flex-direction: row; justify-content: space-between;">
+                <button class="close-btn"
+                    style="flex: 1; padding: 10px; background: #333; color: white; border-radius: 6px; font-size: 1rem; border: none; cursor: pointer;"
+                    onclick="document.getElementById('discordOverlay').classList.remove('is-open')">Cancel</button>
+                <button class="save-btn"
+                    style="flex: 1; background: #5865F2; padding: 10px; border-radius: 6px; font-size: 1rem; border: none; cursor: pointer;"
+                    onclick="procesarDiscordWebhook()">Save & Send</button>
             </div>
         </div>
     </div>
@@ -115,7 +121,7 @@
 
     <footer class="app-footer">
         <div class="footer-content">
-            <p>TBC Duck Analyzer v1.1 © 2026 | <a href="https://github.com/patitokun03-spec/TBC-Duck-Analyzer"
+            <p>TBC Duck Analyzer v1.2 © 2026 | <a href="https://github.com/patitokun03-spec/TBC-Duck-Analyzer"
                     target="_blank">Open Source on GitHub</a></p>
             <p style="font-size: 0.85rem; color: #888;">WoW TBC Log Analyzer | Made for the community</p>
         </div>
