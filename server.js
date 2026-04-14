@@ -1,4 +1,6 @@
-require('dotenv').config();
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -69,7 +71,6 @@ app.post('/api/audit', async (req, res) => {
             // No existe o falló en caché, procedemos a consultar WCL
             try {
 
-                console.log(clientId, clientSecret);
                 if (!clientId || !clientSecret) {
                     return res.status(500).json({ error: "WCL_CLIENT_ID and WCL_CLIENT_SECRET are not configured on the server." });
                 }
@@ -201,5 +202,4 @@ app.get('/report/:logId', (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
-    console.log(clientId, clientSecret);
 });
