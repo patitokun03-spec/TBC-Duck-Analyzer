@@ -307,7 +307,7 @@ const SPELL_DB = {
     // Racial Abilities
     28730: { name: "Arcane Torrent", icon: "spell_shadow_teleport", category: 4 },
     7744: { name: "Will of the Forsaken", icon: "spell_shadow_deathcoil", category: 4 },
-    20594: { name: "Stoneform", icon: "inv_shield_26", category: 4 },
+    20594: { name: "Stoneform", icon: "spell_shadow_unholystrength", category: 4 },
     20549: { name: "War Stomp", icon: "ability_warstomp", category: 4 },
 
     // Consumables (Healthstones, Sappers)

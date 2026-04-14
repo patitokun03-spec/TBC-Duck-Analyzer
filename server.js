@@ -14,14 +14,24 @@ const db = new sqlite3.Database(path.join(__dirname, 'database.sqlite'), (err) =
     if (err) console.error("Error opening DB:", err.message);
 });
 
-db.run(`CREATE TABLE IF NOT EXISTS logs_cache (
-    log_id TEXT PRIMARY KEY,
-    log_data TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-)`);
+db.serialize(() => {
+    db.run(`CREATE TABLE IF NOT EXISTS logs_cache (
+        log_id TEXT PRIMARY KEY,
+        log_data TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )`);
+    // Attempt to add column in case the DB was created before the column was added to the schema
+    db.run(`ALTER TABLE logs_cache ADD COLUMN created_at DATETIME DEFAULT CURRENT_TIMESTAMP`, (err) => {
+        // Ignore duplicate column errors silently
+    });
+});
 
 function cleanupDatabase() {
-    db.run("DELETE FROM logs_cache WHERE created_at < DATETIME('now', '-2 hours')");
+    db.run("DELETE FROM logs_cache WHERE created_at < DATETIME('now', '-2 hours')", (err) => {
+        if (err) {
+            console.error("Cleanup error:", err.message);
+        }
+    });
 }
 cleanupDatabase();
 setInterval(cleanupDatabase, 15 * 60 * 1000); // Se ejecuta cada 15 minutos
