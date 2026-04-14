@@ -9,6 +9,9 @@ const sqlite3 = require('sqlite3').verbose();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const clientId = process.env.WCL_CLIENT_ID;
+const clientSecret = process.env.WCL_CLIENT_SECRET;
+
 // Configurar SQLite y crear tabla
 const db = new sqlite3.Database(path.join(__dirname, 'database.sqlite'), (err) => {
     if (err) console.error("Error opening DB:", err.message);
@@ -58,16 +61,15 @@ app.post('/api/audit', async (req, res) => {
                 // Encontrado en caché
                 try {
                     return res.json(JSON.parse(row.log_data));
-                } catch(e) {
+                } catch (e) {
                     console.error("JSON parse error:", e);
                 }
             }
 
             // No existe o falló en caché, procedemos a consultar WCL
             try {
-                const clientId = process.env.WCL_CLIENT_ID;
-                const clientSecret = process.env.WCL_CLIENT_SECRET;
-                
+
+                console.log(clientId, clientSecret);
                 if (!clientId || !clientSecret) {
                     return res.status(500).json({ error: "WCL_CLIENT_ID and WCL_CLIENT_SECRET are not configured on the server." });
                 }
@@ -96,14 +98,14 @@ app.post('/api/audit', async (req, res) => {
                     `grant_type=client_credentials&client_id=${clientId}&client_secret=${clientSecret}`,
                     { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
                 );
-                
+
                 const token = responseToken.data.access_token;
                 if (!token) throw new Error("Invalid or expired API Keys.");
 
                 // Query y filtro
                 const filterExp = `(type = 'cast' AND ability.id IN (${castIds})) OR (type = 'damage' AND ability.id IN (13241, 30486, 33671)) OR type = 'interrupt' OR type = 'combatantinfo' OR (type IN ('applybuff', 'applybuffstack', 'refreshbuff', 'cast') AND ability.id IN (${buffIds}))`;
-                const query = JSON.stringify({ 
-                    query: `{reportData {report(code: "${logId}") {title fights(killType: Encounters) { id name startTime endTime kill } masterData { actors(type: "Player") { id name subType icon } } events(startTime: 0, endTime: 999999999999, filterExpression: "${filterExp}") { data }}}}`   
+                const query = JSON.stringify({
+                    query: `{reportData {report(code: "${logId}") {title fights(killType: Encounters) { id name startTime endTime kill } masterData { actors(type: "Player") { id name subType icon } } events(startTime: 0, endTime: 999999999999, filterExpression: "${filterExp}") { data }}}}`
                 });
 
                 const responseData = await axios.post(
@@ -144,30 +146,30 @@ app.get('/api/icon/:iconName([\\w\\.-]+).jpg', async (req, res) => {
     const iconName = req.params.iconName;
     const fileName = iconName + '.jpg';
     const iconPath = path.join(__dirname, 'public', 'assets', 'icons', fileName);
-    
+
     if (fs.existsSync(iconPath)) {
         return res.sendFile(iconPath);
     }
-    
+
     try {
         const response = await axios({
             method: 'GET',
             url: `https://wow.zamimg.com/images/wow/icons/large/${fileName}`,
             responseType: 'stream'
         });
-        
+
         const dir = path.dirname(iconPath);
-        if (!fs.existsSync(dir)){
+        if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir, { recursive: true });
         }
-        
+
         const writer = fs.createWriteStream(iconPath);
         response.data.pipe(writer);
-        
+
         writer.on('finish', () => {
             res.sendFile(iconPath);
         });
-        
+
         writer.on('error', (err) => {
             console.error('Error writing icon:', err);
             res.status(500).send('Error saving icon');
@@ -199,4 +201,5 @@ app.get('/report/:logId', (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
+    console.log(clientId, clientSecret);
 });

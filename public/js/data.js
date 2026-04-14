@@ -212,6 +212,8 @@ const ENCHANT_DB = {
     2667: { name: "Savagery" },
     2655: { name: "+15 Shield Block" },
     2648: { name: "+12 Defense" },
+    2747: { name: "+25 SP & +15 Stam" },
+    2659: { name: "+150 HP" },
 };
 
 const SPELL_DB = {
