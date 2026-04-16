@@ -142,8 +142,10 @@ app.post('/api/audit', async (req, res) => {
     }
 });
 
+const https = require('https');
+
 // Endpoint para iconos
-app.get('/api/icon/:iconName([\\w\\.-]+).jpg', async (req, res) => {
+app.get('/api/icon/:iconName([\\w\\.-]+).jpg', (req, res) => {
     const iconName = req.params.iconName;
     const fileName = iconName + '.jpg';
     const iconPath = path.join(__dirname, 'public', 'assets', 'icons', fileName);
@@ -152,41 +154,36 @@ app.get('/api/icon/:iconName([\\w\\.-]+).jpg', async (req, res) => {
         return res.sendFile(iconPath);
     }
 
-    try {
-        const response = await axios({
-            method: 'GET',
-            url: `https://wow.zamimg.com/images/wow/icons/large/${fileName}`,
-            responseType: 'stream'
-        });
+    const dir = path.dirname(iconPath);
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+    }
 
-        const dir = path.dirname(iconPath);
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir, { recursive: true });
+    const url = `https://wow.zamimg.com/images/wow/icons/large/${fileName}`;
+    https.get(url, (response) => {
+        if (response.statusCode === 200) {
+            const writer = fs.createWriteStream(iconPath);
+            response.pipe(writer);
+            writer.on('finish', () => {
+                writer.close();
+                res.sendFile(iconPath);
+            });
+        } else {
+            response.resume(); // free memory
+            serveDefaultIcon(res);
         }
+    }).on('error', (err) => {
+        console.error('Error downloading icon:', err);
+        serveDefaultIcon(res);
+    });
 
-        const writer = fs.createWriteStream(iconPath);
-        response.data.pipe(writer);
-
-        writer.on('finish', () => {
-            res.sendFile(iconPath);
-        });
-
-        writer.on('error', (err) => {
-            console.error('Error writing icon:', err);
-            res.status(500).send('Error saving icon');
-        });
-    } catch (err) {
-        console.error('Error downloading icon:', fileName);
+    function serveDefaultIcon(responseObj) {
         const defPath = path.join(__dirname, 'public', 'assets', 'icons', 'inv_misc_questionmark.jpg');
         if (fs.existsSync(defPath)) {
-            try {
-                fs.copyFileSync(defPath, iconPath);
-                return res.sendFile(iconPath);
-            } catch (copyErr) {
-                return res.sendFile(defPath);
-            }
+            responseObj.sendFile(defPath);
+        } else {
+            responseObj.status(404).send('Icon not found');
         }
-        res.status(404).send('Icon not found');
     }
 });
 

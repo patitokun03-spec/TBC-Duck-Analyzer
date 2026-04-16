@@ -54,28 +54,46 @@
         </div>
     </div>
 
-    <!-- MODAL DISCORD -->
+    <!-- MODAL DISCORD WEBHOOK PROFILES -->
     <div class="overlay" id="discordOverlay">
-        <div class="settings-modal" style="width: 400px; max-width: 95vw;">
-            <div class="settings-header">
-                <h3>💬 Discord Webhook</h3>
-                <button class="close-btn"
-                    onclick="document.getElementById('discordOverlay').classList.remove('is-open')">×</button>
+        <div class="discord-modal">
+            <div class="discord-modal-header">
+                <h3>💬 Discord Webhooks</h3>
+                <button class="discord-close-btn" onclick="closeDiscordModal()">×</button>
             </div>
-            <div class="settings-body" style="padding: 1.5rem;">
-                <div class="input-group">
-                    <label>Webhook URL</label>
-                    <input type="text" id="discordWebhookInput" placeholder="https://discord.com/api/webhooks/...">
+            <div class="discord-modal-body">
+                <!-- Profile List -->
+                <div class="webhook-profiles-section">
+                    <div class="webhook-section-title">
+                        <span>📋 Saved Profiles</span>
+                        <button class="webhook-add-btn" onclick="showWebhookForm()">+ Add New</button>
+                    </div>
+                    <div id="webhookProfilesList" class="webhook-profiles-list">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+
+                <!-- Add / Edit Form (hidden by default) -->
+                <div id="webhookForm" class="webhook-form" style="display:none;">
+                    <div class="webhook-form-title" id="webhookFormTitle">➕ New Profile</div>
+                    <div class="webhook-form-fields">
+                        <div class="webhook-form-group">
+                            <label class="discord-label">Profile Name</label>
+                            <input type="text" id="webhookNameInput" class="discord-input" placeholder="e.g. Raid Officers, #logs...">
+                        </div>
+                        <div class="webhook-form-group">
+                            <label class="discord-label">Webhook URL</label>
+                            <input type="text" id="discordWebhookInput" class="discord-input" placeholder="https://discord.com/api/webhooks/...">
+                        </div>
+                    </div>
+                    <div class="webhook-form-actions">
+                        <button class="discord-cancel-btn" onclick="hideWebhookForm()">← Back</button>
+                        <button class="discord-save-profile-btn" onclick="saveWebhookProfile()">💾 Save Profile</button>
+                    </div>
                 </div>
             </div>
-            <div class="settings-footer"
-                style="display: flex; gap: 10px; flex-direction: row; justify-content: space-between;">
-                <button class="close-btn"
-                    style="flex: 1; padding: 10px; background: #333; color: white; border-radius: 6px; font-size: 1rem; border: none; cursor: pointer;"
-                    onclick="document.getElementById('discordOverlay').classList.remove('is-open')">Cancel</button>
-                <button class="save-btn"
-                    style="flex: 1; background: #5865F2; padding: 10px; border-radius: 6px; font-size: 1rem; border: none; cursor: pointer;"
-                    onclick="procesarDiscordWebhook()">Save & Send</button>
+            <div class="discord-modal-footer">
+                <button class="discord-cancel-btn" onclick="closeDiscordModal()">Close</button>
             </div>
         </div>
     </div>

@@ -11,7 +11,7 @@ const SPEC_ICONS = {
     // PALADIN
     "Paladin": "spell_holy_auramasters",
     "Paladin-Holy": "spell_holy_holybolt",
-    "Paladin-Protection": "inv_shield_06", // Escudo oficial
+    "Paladin-Protection": "spell_holy_avengersshield", // Escudo oficial
     "Paladin-Retribution": "spell_holy_auraoflight",
 
     // HUNTER
@@ -82,7 +82,7 @@ const BUFF_DB = {
     5665: { name: "Bogling Root", icon: "inv_misc_herb_07" },
 
     // Comidas
-    33288: { name: "Warp Burger", icon: "inv_misc_food_65" },
+    33261: { name: "Warp Burger", icon: "inv_misc_food_65" },
     33262: { name: "Grilled Mudfish", icon: "inv_misc_food_78" },
     33256: { name: "Roasted Clefthoof", icon: "inv_misc_food_60" },
     33264: { name: "Crunchy Serpent", icon: "inv_misc_food_88_ravagernuggets" },
@@ -113,18 +113,9 @@ const ENCHANT_DB = {
     2629: { name: "Brilliant Mana Oil", icon: "inv_potion_100" },
     2677: { name: "Superior Mana Oil", icon: "inv_potion_101" }, // Actualizado a Superior Mana Oil
     2678: { name: "Superior Wizard Oil", icon: "inv_potion_141" },
-    2589: { name: "Superior Wizard Oil", icon: "inv_potion_141" },
-    2625: { name: "Superior Wizard Oil", icon: "inv_potion_141" },
-    28017: { name: "Superior Wizard Oil", icon: "inv_potion_141" },
-    2588: { name: "Superior Mana Oil", icon: "inv_potion_101" },
-    2624: { name: "Superior Mana Oil", icon: "inv_potion_101" },
-    2626: { name: "Superior Mana Oil", icon: "inv_potion_101" },
-    28013: { name: "Superior Mana Oil", icon: "inv_potion_101" },
 
     // Piedras
     2713: { name: "Adamantite Sharpening Stone", icon: "inv_stone_sharpeningstone_07" },
-    2714: { name: "Adamantite Sharpening Stone", icon: "inv_stone_sharpeningstone_07" },
-    34340: { name: "Adamantite Sharpening Stone", icon: "inv_stone_sharpeningstone_07" },
     2723: { name: "Scope (+28 Crit)", icon: "inv_stone_weightstone_07" },
     2955: { name: "Adamantite Weightstone", icon: "inv_stone_weightstone_07" },
     2506: { name: "Dense Sharpening Stone", icon: "inv_stone_02" },
@@ -214,6 +205,10 @@ const ENCHANT_DB = {
     2648: { name: "+12 Defense" },
     2747: { name: "+25 SP & +15 Stam" },
     2659: { name: "+150 HP" },
+    2613: { name: "+2% Threat" },
+    2505: { name: "+55 Heal & 19 SP" },
+    2590: { name: "+4 MP5 & 10 Stam & 24 Heal" },
+    2715: { name: "+31 Heal & 11 SP & 5 MP5" },
 };
 
 const SPELL_DB = {
@@ -294,23 +289,23 @@ const SPELL_DB = {
     31842: { name: "Divine Illumination", icon: "spell_holy_divineillumination", category: 2 },
 
     // Trinkets
-    15821: { name: "BL Brooch", icon: "inv_misc_monsterscales_15", category: 3 },
     35166: { name: "Bloodlust Brooch", icon: "inv_misc_monsterscales_15", category: 3 },
     35165: { name: "Essence of Martyr", icon: "inv_valentineperfumebottle", category: 3 },
-    17320: { name: "Essence Martyr", icon: "inv_valentineperfumebottle", category: 3 },
     35163: { name: "Silver Crescent", icon: "inv_weapon_shortblade_23", category: 3 },
     28093: { name: "Swarmguard", icon: "inv_misc_ahnqirajtrinket_04", category: 3 },
     23723: { name: "Mind Quickening", icon: "spell_nature_wispheal", category: 3 },
-    26297: { name: "Berserking", icon: "spell_shadow_berserk", category: 3 },
-    20554: { name: "Berserking", icon: "racial_troll_berserk", category: 3 },
-    20572: { name: "Blood Fury", icon: "racial_orc_berserkerstrength", category: 3 },
     51582: { name: "Rocket Boots", icon: "inv_gizmo_rocketboot_01", category: 3 },
+    33807: { name: "Abacus of Violent Odds", icon: "inv_misc_enggizmos_18", category: 3 },
 
     // Racial Abilities
+    20572: { name: "Blood Fury", icon: "racial_orc_berserkerstrength", category: 3 },
     28730: { name: "Arcane Torrent", icon: "spell_shadow_teleport", category: 4 },
-    7744: { name: "Will of the Forsaken", icon: "spell_shadow_deathcoil", category: 4 },
+    7744: { name: "Will of the Forsaken", icon: "spell_shadow_raisedead", category: 4 },
     20594: { name: "Stoneform", icon: "spell_shadow_unholystrength", category: 4 },
     20549: { name: "War Stomp", icon: "ability_warstomp", category: 4 },
+    26297: { name: "Berserking", icon: "racial_troll_berserk", category: 3 },
+    20554: { name: "Berserking", icon: "racial_troll_berserk", category: 3 },
+    26296: { name: "Berserking", icon: "racial_troll_berserk", category: 3 },
 
     // Consumables (Healthstones, Sappers)
     27238: { name: "Healthstone", icon: "inv_stone_04", category: 5 },
@@ -335,41 +330,516 @@ const SPELL_DB = {
     28495: { name: "Super Healing Potion", icon: "inv_potion_131", category: 5 }
 };
 const OPTIMAL_ENCHANTS = {
+    // =====================================================================
+    // OPTIMAL ENCHANTS PER SPEC - TBC (3-Tier System)
+    // best = BiS enchants (GREEN ✨)
+    // alt  = Acceptable alternatives (YELLOW 🟨)
+    // Not in either = Bad/wrong enchant (RED ❓)
+    // =====================================================================
+
     // --- WARRIORS ---
-    "Warrior-Arms": [2673, 2661, 2647, 2657, 3012, 3003, 2724, 2523, 2654, 2986, 2997],
-    "Warrior-Fury": [2673, 2661, 2647, 2657, 3012, 3003, 2724, 2523, 2654, 2986, 2997],
-    "Warrior-Protection": [2931, 2671, 2662, 2991, 1071, 2646, 2651, 2991, 2978],
+    "Warrior-Arms": {
+        best: [
+            3003,           // Head: Glyph of Ferocity
+            2986, 2997,     // Shoulder: Greater Vengeance (Aldor) / Greater Blade (Scryer)
+            2661,           // Chest: +6 Stats
+            368,            // Cloak: +12 Agi
+            2647,           // Bracer: +12 Str
+            684,            // Gloves: +15 Str
+            3012,           // Legs: Nethercobra (+50 AP, +12 Crit)
+            2940, 2939,     // Boots: Boar's Speed / Cat's Swiftness
+            2673            // Weapon: Mongoose
+        ],
+        alt: [
+            2983,           // Shoulder: lesser inscription
+            1891,           // Chest: +4 Stats
+            2657, 1593, 1594, // Bracer: +12 Agi, +24 AP, +26 AP
+            2996, 1583, 2564, // Gloves: +13 Crit, +24 AP, +15 Agi
+            3010, 3011,     // Legs: Cobrahide (+40 AP)
+            911,            // Boots: Minor Speed
+            2667, 2670, 2929 // Weapon: Savagery, +35 Agi, +2 Dmg
+        ]
+    },
+    "Warrior-Fury": {
+        best: [
+            3003,           // Head: Glyph of Ferocity
+            2986, 2997,     // Shoulder: Greater Vengeance / Blade
+            2661,           // Chest: +6 Stats
+            368,            // Cloak: +12 Agi
+            2647,           // Bracer: +12 Str
+            684,            // Gloves: +15 Str
+            3012,           // Legs: Nethercobra
+            2940, 2939,     // Boots: Boar's / Cat's Speed
+            2673            // Weapon: Mongoose
+        ],
+        alt: [
+            2983,           // Shoulder: lesser inscription
+            1891,           // Chest: +4 Stats
+            2657, 1593, 1594, // Bracer: +12 Agi, AP
+            2996, 1583, 2564, // Gloves: +13 Crit, +24 AP, +15 Agi
+            3010, 3011,     // Legs: Cobrahide
+            911,            // Boots: Minor Speed
+            2667, 2670, 2929 // Weapon: Savagery, +35 Agi, +2 Dmg
+        ]
+    },
+    "Warrior-Protection": {
+        best: [
+            2999,           // Head: Glyph of the Defender
+            2991,           // Shoulder: Greater Inscription of Warding
+            2661, 2659,     // Chest: +6 Stats / +150 HP (both BiS)
+            2622,           // Cloak: +12 Dodge
+            2649,           // Bracer: +12 Stam
+            684,            // Gloves: +15 Str (threat)
+            3013,           // Legs: Nethercleft (+40 Stam, +12 Agi)
+            2940,           // Boots: Boar's Speed
+            2673,           // Weapon: Mongoose
+            1071            // Shield: +18 Stam
+        ],
+        alt: [
+            2978,           // Shoulder: lesser Warding
+            1891,           // Chest: +4 Stats
+            2662, 368, 1888, // Cloak: +120 Armor, +12 Agi, +5 Resist
+            2613,           // Cloak: +2% Threat
+            2648, 2647, // Bracer: +12 Def, +12 Stam alt, +12 Str
+            2996, 2990,     // Gloves: +13 Crit, +13 Def
+            3012, 3010, 3011, // Legs: Nethercobra/Cobrahide
+            911, 929,       // Boots: Minor Speed, +7 Stam
+            2670,           // Weapon: +35 Agi
+            2655, 2605      // Shield: +15 Block, +18 Spell
+        ]
+    },
 
     // --- PALADINS ---
-    "Paladin-Holy": [2721, 2715, 2661, 2565, 2643, 2981, 2255, 2888, 1883, 2657, 2646, 2980, 2993],
-    "Paladin-Protection": [2669, 2565, 2322, 2661, 2253, 3013, 2911, 2890, 1071, 2651, 2646, 2991, 2978],
-    "Paladin-Retribution": [2673, 2647, 2661, 2657, 2654, 3012, 2255, 2888, 2986, 2997],
-
-    // --- MAGES ---
-    "Mage-Fire": [2722, 2322, 2661, 2565, 2643, 3013, 2911, 2890, 2657, 1119, 2982, 2995],
-    "Mage-Arcane": [2722, 2322, 2661, 2565, 2643, 3013, 2911, 2890, 2657, 1119, 2982, 2995],
-    "Mage-Frost": [2720, 2322, 2661, 2565, 2643, 3013, 2911, 2890, 2657, 2982, 2995],
-
-    // --- WARLOCKS ---
-    "Warlock-Affliction": [2720, 2322, 2661, 2565, 2643, 3013, 2911, 2890, 2657, 2711, 2982, 2995],
-    "Warlock-Demonology": [2720, 2322, 2661, 2565, 2643, 3013, 2911, 2890, 2657, 2711, 2982, 2995],
-    "Warlock-Destruction": [2720, 2322, 2661, 2565, 2643, 3013, 2911, 2890, 2657, 2711, 2982, 2995],
+    "Paladin-Holy": {
+        best: [
+            3001,           // Head: Glyph of Renewal
+            2980, 2979,     // Shoulder: Faith (Aldor) / Oracle (Scryer)
+            2661,           // Chest: +6 Stats
+            2621,           // Cloak: Subtlety
+            2617, 2930,     // Bracer: +30 Heal & 10 SP (BiS all healers), +20 Heal & 7 SP
+            2322,           // Gloves: +35 Heal & 12 SP
+            2746,           // Legs: Silver Spellthread (+66 Heal)
+            2940,           // Boots: Boar's Speed
+            2343,           // Weapon: Major Healing (+81 Heal)
+            2654, 369       // Shield: +12 Int (best for holy paladins)
+        ],
+        alt: [
+            3002,           // Head: Glyph of Power (SP-focused build)
+            2982, 2995,     // Shoulder: DPS inscriptions (SP-focused build)
+            2715,           // Shoulder: +31 Heal & 11 SP & 5 MP5
+            1891, 2659,     // Chest: +4 Stats, +150 HP
+            2654, 2928, 2566, // Bracer: +12 Int, +12 SP, +24 Heal
+            2668, 2650, 2937, // Gloves: +20 SP/Heal, +15 SP, +20 SP
+            2745, 2748, 2747, 2590, // Legs: lesser spellthreads, +24 Heal legs
+            911, 2992, 3150, 2657, // Boots: Minor Speed, +5 MP5, +6 MP5, +12 Agi
+            2705, 2505, 2669, // Weapon: +55 Heal, +55 Heal & 19 SP, +40 SP
+            2928             // Ring: +12 SP (enchanting)
+        ]
+    },
+    "Paladin-Protection": {
+        best: [
+            2999, 3002,           // Head: Glyph of the Defender
+            2991,           // Shoulder: Greater Warding
+            2661, 2659,     // Chest: +6 Stats / +150 HP
+            2622,           // Cloak: +12 Dodge
+            2646, 2650,          // Bracer: +12 Stam
+            2937,            // Gloves: +20 SP
+            2748,
+            2940, 2649,     // Boots: Boar's Speed, +12 Stam (best for prot)
+            2669,           // Weapon: +40 SP
+            1071,           // Shield: +18 Stam
+            2928, 2928
+        ],
+        alt: [
+            2978,           // Shoulder: lesser Warding
+            1891,           // Chest: +4 Stats
+            2662, 368, 1888, // Cloak: Armor, Agi, Resist
+            2613,           // Cloak: +2% Threat
+            2648, 2647,     // Bracer: Def, Str
+            2996, 2990, // Gloves: Crit, Def, SP
+            3012, 3010, 3011, // Legs: DPS options
+            911, 929,       // Boots: Speed, +7 Stam
+            2669, 2670,     // Weapon: +40 SP, +35 Agi
+            2655, 2605      // Shield: Block, Spell
+        ]
+    },
+    "Paladin-Retribution": {
+        best: [
+            3003,           // Head: Glyph of Ferocity
+            2986, 2997,     // Shoulder: Greater Vengeance / Blade
+            2661,           // Chest: +6 Stats
+            368,            // Cloak: +12 Agi
+            2647,           // Bracer: +12 Str
+            684,            // Gloves: +15 Str
+            3012,           // Legs: Nethercobra
+            2940, 2939, 2657, // Boots: Boar's / Cat's Speed, +12 Agi (best for ret)
+            2673            // Weapon: Mongoose
+        ],
+        alt: [
+            2983,           // Shoulder: lesser inscription
+            1891,           // Chest: +4 Stats
+            1593, 1594,     // Bracer: AP
+            2996, 1583, 2564, // Gloves: Crit, AP, +15 Agi
+            3010, 3011,     // Legs: Cobrahide
+            911,            // Boots: Minor Speed
+            2667, 2670, 2929 // Weapon: Savagery, +35 Agi, +2 Dmg
+        ]
+    },
 
     // --- HUNTERS ---
-    "Hunter-BeastMastery": [2723, 2655, 2647, 2654, 2661, 3012, 2255, 2888, 2651, 2986, 2997],
-    "Hunter-Marksmanship": [2723, 2655, 2647, 2654, 2661, 3012, 2255, 2888, 2651, 2986, 2997],
+    "Hunter-BeastMastery": {
+        best: [
+            3003,           // Head: Glyph of Ferocity
+            2986, 2997,     // Shoulder: Vengeance / Blade
+            2661,           // Chest: +6 Stats
+            368,            // Cloak: +12 Agi
+            1593,           // Bracer: +24 AP (best for hunters)
+            2564,           // Gloves: +15 Agi
+            3012,           // Legs: Nethercobra
+            2940, 2939,     // Boots: Boar's / Cat's Speed
+            2673,           // Weapon: Mongoose
+            2724,           // Ranged: Stabilized Eternium Scope
+            2929            // Ring: +2 Weapon Dmg (enchanting)
+        ],
+        alt: [
+            2606,           // Shoulder: +30 AP (lesser)
+            2983,           // Shoulder: lesser inscription
+            1891,           // Chest: +4 Stats
+            2657, 1594, 2647, // Bracer: +12 Agi, +26 AP, +12 Str
+            2996, 684, 1583, // Gloves: +13 Crit, +15 Str, +24 AP
+            3010, 3011,     // Legs: Cobrahide
+            911, 2657,      // Boots: Minor Speed, +12 Agi
+            2670            // Weapon: +35 Agi
+        ]
+    },
+    "Hunter-Marksmanship": {
+        best: [
+            3003, 2986, 2997, 2661, 368,
+            1593,           // Bracer: +24 AP (best)
+            2564,           // Gloves: +15 Agi
+            3012, 2940, 2939, 2673, 2724,
+            2929            // Ring: +2 Weapon Dmg (enchanting)
+        ],
+        alt: [
+            2606, 2983, 1891, 2657, 1594, 2647,
+            2996, 684, 1583, 3010, 3011, 911, 2670
+        ]
+    },
+    "Hunter-Survival": {
+        best: [
+            3003, 2986, 2997, 2661, 368,
+            1593, 2564, 3012, 2940, 2939, 2673, 2724,
+            2929            // Ring: +2 Weapon Dmg (enchanting)
+        ],
+        alt: [
+            2606, 2983, 1891, 2657, 1594, 2647,
+            2996, 684, 1583, 3010, 3011, 911, 2670
+        ]
+    },
+
+    // --- ROGUES ---
+    "Rogue-Combat": {
+        best: [
+            3003,           // Head: Glyph of Ferocity
+            2986, 2997,     // Shoulder: Vengeance / Blade
+            2661,           // Chest: +6 Stats
+            368,            // Cloak: +12 Agi
+            2657,           // Bracer: +12 Agi
+            2564,           // Gloves: +15 Agi
+            3012,           // Legs: Nethercobra
+            2940, 2939,     // Boots: Speed
+            2673            // Weapon: Mongoose
+        ],
+        alt: [
+            2983, 1891,
+            1593, 1594,     // Bracer: AP
+            2996, 1583, 684, // Gloves: Crit, AP, Str
+            3010, 3011,
+            911, 2670
+        ]
+    },
+    "Rogue-Assassination": {
+        best: [
+            3003, 2986, 2997, 2661, 368, 2657, 2564,
+            3012, 2940, 2939, 2673
+        ],
+        alt: [
+            2983, 1891, 1593, 1594,
+            2996, 1583, 684, 3010, 3011, 911, 2670
+        ]
+    },
+    "Rogue-Subtlety": {
+        best: [
+            3003, 2986, 2997, 2661, 368, 2657, 2564,
+            3012, 2940, 2939, 2673
+        ],
+        alt: [
+            2983, 1891, 1593, 1594,
+            2996, 1583, 684, 3010, 3011, 911, 2670
+        ]
+    },
 
     // --- PRIESTS ---
-    "Priest-Holy": [2721, 2715, 2661, 2565, 2643, 2981, 2255, 2888, 2657, 2980, 2993],
-    "Priest-Shadow": [2720, 2322, 2661, 2565, 2643, 3013, 2911, 2890, 2657, 2982, 2995],
-
-    // --- DRUIDS ---
-    "Druid-Feral": [2655, 2661, 2647, 2657, 3012, 2255, 2888, 2654, 1883, 2651, 2986, 2997, 2991, 2978],
-    "Druid-Balance": [2722, 2720, 2322, 2661, 2565, 2643, 3013, 2911, 2890, 2657, 2621, 2982, 2995],
-    "Druid-Restoration": [2721, 2715, 2661, 2565, 2643, 2981, 2255, 2888, 2657, 1883, 2523, 2980, 2993],
+    "Priest-Holy": {
+        best: [
+            3001,           // Head: Glyph of Renewal
+            2980, 2979,     // Shoulder: Faith / Oracle
+            2661,           // Chest: +6 Stats
+            2621,           // Cloak: Subtlety
+            2617, 2930,     // Bracer: +30 Heal & 10 SP (BiS all healers), +20 Heal & 7 SP
+            2322,           // Gloves: +35 Heal & 12 SP (best healer gloves)
+            2746,           // Legs: Silver Spellthread
+            2940,           // Boots: Boar's Speed
+            2343            // Weapon: Major Healing
+        ],
+        alt: [
+            2715,           // Shoulder: +31 Heal & 11 SP & 5 MP5
+            1891,           // Chest: +4 Stats
+            2654, 2928, 2566, // Bracer: Int, SP, lesser Heal
+            2668, 2650,     // Gloves: +20 SP/Heal, +15 SP
+            2745, 2748, 2747, 2590, // Legs: lesser spellthreads
+            911, 2992, 3150, // Boots: Speed, MP5
+            2705, 2505, 2669 // Weapon: +55 Heal, +55 Heal & 19 SP, +40 SP
+        ]
+    },
+    "Priest-Discipline": {
+        best: [
+            3001, 2980, 2979, 2661, 2621,
+            2617, 2930,     // Bracer: +30 Heal & 10 SP (BiS all healers), +20 Heal & 7 SP
+            2322,           // Gloves: +35 Heal & 12 SP
+            2746, 2940, 2343
+        ],
+        alt: [
+            2715, 1891, 2654, 2928, 2566,
+            2668, 2650,
+            2745, 2748, 2747, 2590,
+            911, 2992, 3150, 2705, 2505, 2669
+        ]
+    },
+    "Priest-Shadow": {
+        best: [
+            3002,           // Head: Glyph of Power
+            2982, 2995,     // Shoulder: Discipline (Aldor) / Orb (Scryer)
+            2661,           // Chest: +6 Stats
+            2621,           // Cloak: Subtlety
+            2928,           // Bracer: +12 SP
+            2937,           // Gloves: +20 SP (best caster gloves)
+            2748,           // Legs: Runic Spellthread
+            2940,           // Boots: Boar's Speed
+            2672,           // Weapon: Soulfrost
+            2650,
+        ],
+        alt: [
+            2981,           // Shoulder: lesser inscription
+            1891,           // Chest: +4 Stats
+            2938,           // Cloak: +20 Spell Pen
+            2654,           // Bracer: +12 Int
+            2935, 2934, 2668, // Gloves: +15 SP, Spell Hit, Spell Crit, +20 SP/Heal
+            2747,           // Legs: Mystic Spellthread
+            911,            // Boots: Minor Speed
+            2669, 2504, 2614 // Weapon: +40 SP, +30 SP, +20 Shadow
+        ]
+    },
 
     // --- SHAMANS ---
-    "Shaman-Elemental": [2669, 2322, 2661, 2565, 2643, 3013, 2911, 2890, 2657, 3243, 2646, 2982, 2995],
-    "Shaman-Enhancement": [2673, 2647, 2661, 2657, 2654, 3012, 2255, 2888, 2986, 2997],
-    "Shaman-Restoration": [2721, 2715, 2661, 2565, 2643, 2981, 2255, 2888, 2657, 2646, 1883, 2980, 2993]
+    "Shaman-Elemental": {
+        best: [
+            3002,           // Head: Glyph of Power
+            2982, 2995,     // Shoulder: Discipline / Orb
+            2661,           // Chest: +6 Stats
+            2621,           // Cloak: Subtlety
+            2928,           // Bracer: +12 SP
+            2937,           // Gloves: +20 SP (best caster gloves)
+            2748,           // Legs: Runic Spellthread
+            2940,           // Boots: Boar's Speed
+            2671,           // Weapon: Sunfire
+            2654, 369       // Shield: +12 Int (best for ele shaman)
+        ],
+        alt: [
+            2981, 1891, 2938,
+            2654,
+            2650, 2935, 2934, 2668,
+            2747, 911, 2504, 2669
+        ]
+    },
+    "Shaman-Enhancement": {
+        best: [
+            3003,           // Head: Glyph of Ferocity
+            2986, 2997,     // Shoulder: Vengeance / Blade
+            2661,           // Chest: +6 Stats
+            368,            // Cloak: +12 Agi
+            2647,           // Bracer: +12 Str
+            684,            // Gloves: +15 Str
+            3012,           // Legs: Nethercobra
+            2940, 2939,     // Boots: Speed
+            2673            // Weapon: Mongoose
+        ],
+        alt: [
+            2983, 1891,
+            2657, 1593, 1594,
+            2996, 1583, 2564,
+            3010, 3011, 911,
+            2667, 2670
+        ]
+    },
+    "Shaman-Restoration": {
+        best: [
+            3001, 2980, 2979, 2661, 2621,
+            2617, 2930,     // Bracer: +30 Heal & 10 SP (BiS all healers), +20 Heal & 7 SP
+            2322,           // Gloves: +35 Heal & 12 SP (best healer gloves)
+            2746, 2940, 2343,
+            2654, 369       // Shield: +12 Int (best for resto shaman)
+        ],
+        alt: [
+            2715, 1891, 2654, 2928, 2566,
+            2668, 2650,
+            2745, 2748, 2747, 2590,
+            911, 2992, 3150, 2705, 2505, 2669
+        ]
+    },
+
+    // --- MAGES ---
+    "Mage-Arcane": {
+        best: [
+            3002,           // Head: Glyph of Power
+            2982, 2995,     // Shoulder: Discipline / Orb
+            2661,           // Chest: +6 Stats
+            2621,           // Cloak: Subtlety
+            2654,           // Bracer: +12 Int (best for mages)
+            2937,           // Gloves: +20 SP (best caster gloves)
+            2748,           // Legs: Runic Spellthread
+            2940,           // Boots: Boar's Speed
+            2671            // Weapon: Sunfire (Arcane + Fire)
+        ],
+        alt: [
+            2981, 1891, 2938,
+            2928,           // Bracer: +12 SP (alt)
+            2650, 2935, 2934, 2668,
+            2747, 911, 2669, 2504
+        ]
+    },
+    "Mage-Fire": {
+        best: [
+            3002, 2982, 2995, 2661, 2621,
+            2654,           // Bracer: +12 Int (best for mages)
+            2937,           // Gloves: +20 SP
+            2748, 2940, 2671
+        ],
+        alt: [
+            2981, 1891, 2938, 2928,
+            2650, 2935, 2934, 2668,
+            2747, 911, 2669, 2504
+        ]
+    },
+    "Mage-Frost": {
+        best: [
+            3002, 2982, 2995, 2661, 2621,
+            2654,           // Bracer: +12 Int (best for mages)
+            2937,           // Gloves: +20 SP
+            2748, 2940, 2672  // Soulfrost for Frost
+        ],
+        alt: [
+            2981, 1891, 2938, 2928,
+            2650, 2935, 2934, 2668,
+            2747, 911, 2669, 2504
+        ]
+    },
+
+    // --- WARLOCKS ---
+    "Warlock-Affliction": {
+        best: [
+            3002,           // Head: Glyph of Power
+            2982, 2995,     // Shoulder: Discipline / Orb
+            2661,           // Chest: +6 Stats
+            2621,           // Cloak: Subtlety
+            2928,           // Bracer: +12 SP
+            2937,           // Gloves: +20 SP (best caster gloves)
+            2748,           // Legs: Runic Spellthread
+            2940,           // Boots: Boar's Speed
+            2672            // Weapon: Soulfrost (Shadow)
+        ],
+        alt: [
+            2981, 1891, 2938, 2654,
+            2650, 2935, 2934, 2668,
+            2747, 911,
+            2669, 2504, 2614
+        ]
+    },
+    "Warlock-Demonology": {
+        best: [
+            3002, 2982, 2995, 2661, 2621, 2928,
+            2937,           // Gloves: +20 SP
+            2748, 2940, 2672
+        ],
+        alt: [
+            2981, 1891, 2938, 2654,
+            2650, 2935, 2934, 2668,
+            2747, 911, 2669, 2504
+        ]
+    },
+    "Warlock-Destruction": {
+        best: [
+            3002, 2982, 2995, 2661, 2621, 2928,
+            2937,           // Gloves: +20 SP
+            2748, 2940, 2671, 2672  // Sunfire for Fire Destr
+        ],
+        alt: [
+            2981, 1891, 2938, 2654,
+            2650, 2935, 2934, 2668,
+            2747, 911, 2669, 2504
+        ]
+    },
+
+    // --- DRUIDS ---
+    "Druid-Feral": {
+        best: [
+            3003, 2999,     // Head: Ferocity (DPS) or Defender (Tank) - both BiS
+            2986, 2997,     // Shoulder DPS: Greater Vengeance / Blade
+            2991,           // Shoulder Tank: Greater Warding
+            2661, 2659,     // Chest: +6 Stats (best) / +150 HP (tank)
+            368, 2622,      // Cloak: +12 Agi (best DPS) / +12 Dodge (Tank)
+            2657,           // Bracer DPS: +12 Agi
+            2646,           // Bracer Tank: +12 Stam (best for feral/tank)
+            684,            // Gloves: +15 Str
+            3012, 3013,     // Legs: Nethercobra (DPS) / Nethercleft (Tank)
+            2940, 2939,     // Boots: Boar's Speed / Cat's Swiftness (best)
+            2673, 2670,     // Weapon: Mongoose, +35 Agi (both best)
+            2929, 2649      // Ring: +2 Weapon Dmg (best)
+        ],
+        alt: [
+            2983, 2978,     // Shoulder: lesser inscriptions
+            1891,           // Chest: +4 Stats
+            2662,           // Cloak: +120 Armor
+            2647, 1593, 1594, 2648, // Bracer: Str, AP, Def
+            2996, 1583, 2990, 2564, // Gloves: Crit, AP, Def, +15 Agi
+            3010, 3011,     // Legs: Cobrahide
+            911, 2606, 2649 // Boots: Minor Speed
+        ]
+    },
+    "Druid-Balance": {
+        best: [
+            3002, 2982, 2995, 2661, 2621, 2928,
+            2937,           // Gloves: +20 SP (best caster)
+            2748, 2940, 2671
+        ],
+        alt: [
+            2981, 1891, 2938, 2654,
+            2650, 2935, 2934, 2668,
+            2747, 911, 2669, 2504
+        ]
+    },
+    "Druid-Restoration": {
+        best: [
+            3001, 2980, 2979, 2661, 2621,
+            2617, 2930,     // Bracer: +30 Heal & 10 SP (BiS all healers), +20 Heal & 7 SP
+            2322,           // Gloves: +35 Heal & 12 SP (best healer gloves)
+            2746, 2940, 2343
+        ],
+        alt: [
+            2715, 1891, 2654, 2928, 2566,
+            2668, 2650,
+            2745, 2748, 2747, 2590,
+            911, 2992, 3150, 2705, 2505, 2669
+        ]
+    }
 };

@@ -137,6 +137,10 @@ button:active {
 }
 
 .tab-btn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     background: #222;
     color: #aaa;
     border: 1px solid #444;
@@ -145,6 +149,18 @@ button:active {
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
+}
+
+.boss-tab-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    transform: scale(2.2) translateX(6px);
+    transform-origin: right center;
+    position: relative;
+    z-index: 5;
+    pointer-events: none;
+    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.6));
 }
 
 .tab-btn:hover {
@@ -207,6 +223,50 @@ button:active {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* --- FILTROS DE CLASE --- */
+.class-filters-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+    width: fit-content;
+    padding: 10px;
+    background: #1a1a1a;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.class-filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #222;
+    border: 1px solid #444;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    transition: 0.2s;
+    opacity: 0.4;
+    filter: grayscale(100%);
+}
+
+.class-filter-btn.active {
+    opacity: 1;
+    filter: none;
+    background: #333;
+    border-color: #666;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+.filter-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
 }
 
 /* --- LAYOUT INTERIOR DEL BOSS --- */
@@ -415,6 +475,7 @@ button:active {
 .mechanics-sidebar {
     width: 280px;
     flex-shrink: 0;
+    margin-top: 0;
 }
 
 .mech-box {
@@ -428,14 +489,18 @@ button:active {
 .mech-header {
     background: rgba(255, 82, 82, 0.2);
     color: #ff5252;
-    padding: 12px;
+    padding: 8px 15px;
     font-weight: bold;
     text-align: center;
     border-bottom: 1px solid #ff5252;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-family: 'Expressway', 'Montserrat', sans-serif;
     text-transform: uppercase;
     letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
 
 .mech-body {
@@ -724,8 +789,6 @@ button:active {
 
 .settings-header h3 {
     margin: 0;
-    margin-bottom: 10px;
-    padding-top: 20px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -741,11 +804,10 @@ button:active {
     color: #666;
     font-size: 2rem;
     padding: 0;
-    margin-left: auto;
-    margin-right: 15px;
-    margin-top: 10px;
     line-height: 1;
     transition: 0.2s;
+    border: none;
+    cursor: pointer;
 }
 
 .close-btn:hover {
@@ -1042,17 +1104,38 @@ div.wowhead-tooltip .iconmedium {
     display: block;
 }
 
-.paperdoll-gems {
+/* Contenedor de gemas anclado a ambos lados */
+.gem-container {
     position: absolute;
     bottom: -4px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+    z-index: 10;
+}
+
+.gem-container img {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: block;
+}
+
+.paperdoll-gems {
+    position: absolute;
+    bottom: -6px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
+    justify-content: center;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     gap: 1px;
     pointer-events: auto;
-    z-index: 10;
+    z-index: 25;
+    width: max-content;
 }
 
 .paperdoll-gem-icon {
@@ -1063,6 +1146,26 @@ div.wowhead-tooltip .iconmedium {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
     background: #000;
     display: block !important;
+}
+
+/* Meta gem diamond/rhombus shape */
+.paperdoll-gem-icon.meta-gem {
+    border-radius: 2px;
+    transform: rotate(45deg);
+    width: 11px;
+    height: 11px;
+}
+
+.paperdoll-gem-icon.meta-gem img,
+.meta-gem {
+    object-fit: cover;
+}
+
+.socket-icon.meta-gem {
+    border-radius: 2px !important;
+    transform: rotate(45deg);
+    width: 11px !important;
+    height: 11px !important;
 }
 
 /* Left side slots */
@@ -1260,11 +1363,29 @@ div.wowhead-tooltip .iconmedium {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    display: block;
+    display: flex;
+    align-items: center;
     line-height: 1.1;
     background-image: none !important;
     padding-left: 0 !important;
     pointer-events: auto;
+}
+
+.gear-table-name a {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    /* Para que el icono que inserta wowhead se alinee con el texto de calidad */
+}
+
+.item-name-no-tooltip {
+    pointer-events: none !important;
+    /* Desactiva el hover y el click, bloqueando el tooltip de Wowhead */
+    text-decoration: none !important;
+    /* Quita el subrayado de enlace */
+    color: inherit;
+    /* Mantiene el color dictado por la calidad del ítem */
+    cursor: default;
 }
 
 .gear-table-enchants {
@@ -1361,58 +1482,910 @@ div.wowhead-tooltip .iconmedium {
 /* --- RESPONSIVE DESIGN --- */
 @media (max-width: 768px) {
     body {
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 0.5rem;
+        overflow-x: hidden;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    /* --- LOGO --- */
+    .logo-container {
+        padding: 15px 0 30px 0;
     }
 
     h1 {
-        font-size: 1.8rem;
-        letter-spacing: 2px;
+        font-size: 1.3rem;
+        letter-spacing: 1px;
     }
 
+    h1::after {
+        bottom: -10px;
+        height: 3px;
+    }
+
+    /* --- GITHUB / FEEDBACK BUTTONS --- */
+    .feedback-btn,
+    .github-btn {
+        position: fixed;
+        bottom: auto;
+        top: auto;
+        right: auto;
+        padding: 8px 12px;
+        font-size: 0.75rem;
+        border-radius: 30px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+
+    .feedback-btn {
+        position: fixed;
+        bottom: 15px;
+        right: 15px;
+        font-size: 0.7rem;
+        padding: 8px 14px;
+    }
+
+    .github-btn {
+        position: fixed;
+        bottom: 55px;
+        right: 15px;
+        font-size: 0.7rem;
+        padding: 8px 14px;
+    }
+
+    /* --- TOP BAR (INPUT) --- */
     .top-bar {
         flex-direction: column;
-        padding: 1rem;
+        padding: 0.8rem;
+        margin: 0 auto 1.2rem auto;
+        max-width: 100%;
+        gap: 8px;
     }
 
     .top-bar input {
         width: 100%;
+        font-size: 0.95rem;
+        padding: 0.5rem 0.8rem;
+        box-sizing: border-box;
     }
 
     .audit-btn {
         width: 100%;
+        font-size: 0.95rem;
+        padding: 0.6rem;
     }
 
     #btnDiscord {
         width: 100% !important;
+        margin-left: 0 !important;
+        font-size: 0.85rem !important;
     }
 
-    .github-btn,
-    .feedback-btn {
-        bottom: auto;
-        top: 10px;
-        position: absolute;
-        right: 10px;
+    /* --- ENCOUNTER TABS (Horizontal scroll) --- */
+    .encounter-tabs {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 6px;
+        margin-bottom: 12px;
+        padding: 6px 4px;
+        scrollbar-width: thin;
+        scrollbar-color: #444 transparent;
+        justify-content: flex-start;
     }
 
-    .github-btn {
-        right: 90px;
+    .encounter-tabs::-webkit-scrollbar {
+        height: 4px;
     }
 
+    .encounter-tabs::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .encounter-tabs::-webkit-scrollbar-thumb {
+        background: #444;
+        border-radius: 4px;
+    }
+
+    .tab-btn {
+        padding: 6px 10px;
+        font-size: 0.7rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+        letter-spacing: 0.5px;
+    }
+
+    .boss-tab-icon {
+        width: 18px;
+        height: 18px;
+        transform: scale(1.5) translateX(3px);
+    }
+
+    .tab-btn.active {
+        transform: none;
+    }
+
+    /* --- CLASS FILTERS --- */
+    .class-filters-container {
+        gap: 5px;
+        padding: 6px;
+        margin: 0 auto 12px auto;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .class-filter-btn {
+        padding: 4px 8px;
+        font-size: 0.7rem;
+        gap: 4px;
+    }
+
+    .filter-icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* --- BOSS CONTENT LAYOUT --- */
+    .boss-content-inner {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .class-rows-container {
+        min-width: 100%;
+        gap: 10px;
+    }
+
+    /* --- CLASS ROWS & PLAYER CARDS --- */
+    .class-row {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .class-header {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .class-players {
+        padding: 8px;
+        gap: 8px;
+        flex-direction: column;
+    }
+
+    .player-card {
+        min-width: unset;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .player-name {
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+    }
+
+    .spec-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    /* --- BUFFS --- */
+    .buff-bar {
+        gap: 8px;
+        padding: 8px;
+    }
+
+    .buff-item {
+        width: 30px !important;
+        margin: 0 2px !important;
+    }
+
+    .buff-icon {
+        width: 22px !important;
+        height: 22px !important;
+    }
+
+    .buff-ratio {
+        font-size: 0.7rem !important;
+    }
+
+    /* --- SPELLS --- */
+    .spell-grid {
+        gap: 6px;
+    }
+
+    .spell-item {
+        width: 42px;
+    }
+
+    .spell-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .spell-count {
+        font-size: 0.75rem;
+    }
+
+    .inspect-btn {
+        font-size: 0.7rem;
+        padding: 5px;
+    }
+
+    /* --- MECHANICS SIDEBAR --- */
     .mechanics-sidebar {
         width: 100%;
         margin-top: 1rem;
     }
 
-    .player-card {
-        min-width: 140px;
+    /* --- GEAR INSPECTOR MODAL (CRITICAL) --- */
+    .settings-modal.paperdoll-card {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
     }
 
-    .encounter-tabs {
-        gap: 5px;
+    .settings-header {
+        padding: 0.8rem 1rem;
+        flex-shrink: 0;
+    }
+
+    .settings-header h3 {
+        font-size: 1rem;
+    }
+
+    .settings-body.gear-modal-body {
+        padding: 0.5rem !important;
+        overflow-y: auto;
+        flex: 1;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .gear-modal-content {
+        flex-direction: column;
+        width: 100% !important;
+        gap: 12px;
+    }
+
+    /* Paperdoll: centered, compact */
+    .paperdoll-container {
+        flex: 0 0 auto !important;
+        width: 220px !important;
+        height: 400px !important;
+        margin: 0 auto;
+        align-self: center;
+    }
+
+    /* Slot size adjustments */
+    .gear-slot {
+        width: 34px;
+        height: 34px;
+    }
+
+    .slot-15 { top: 350px; left: 50px; }
+    .slot-16 { top: 350px; left: 90px; }
+    .slot-17 { top: 350px; left: 130px; }
+
+    /* Gear table: single column on mobile */
+    .gear-table-container {
+        grid-template-columns: 1fr !important;
+        gap: 10px;
+        padding-right: 0;
+    }
+
+    .gear-table-row {
+        height: auto;
+        min-height: 36px;
+        padding: 3px;
+    }
+
+    .gear-table-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .gear-table-icon-group {
+        width: 36px;
+        height: 30px;
+        margin-right: 4px;
+    }
+
+    .gear-table-details {
+        min-width: 0;
+    }
+
+    .gear-table-details a.gear-table-name,
+    .gear-table-name a {
+        font-size: 0.75rem;
+    }
+
+    .gear-table-enchants {
+        font-size: 0.65rem;
+    }
+
+    .table-section-title {
+        font-size: 0.75rem;
+        margin: 8px 0 4px 0;
+    }
+
+    /* --- FOOTER --- */
+    .app-footer {
+        margin-left: -0.5rem;
+        margin-right: -0.5rem;
+        margin-bottom: -0.5rem;
+        padding: 1.2rem 0.5rem;
+    }
+
+    .footer-content p {
+        font-size: 0.8rem;
+    }
+
+    /* --- DISCORD MODAL --- */
+    .discord-modal {
+        width: 95vw;
+        max-width: 95vw;
+    }
+
+    .discord-modal-header {
+        padding: 0.8rem 1rem;
+    }
+
+    .discord-modal-header h3 {
+        font-size: 1rem;
+    }
+
+    .discord-modal-body {
+        padding: 1rem;
+    }
+
+    .discord-input {
+        font-size: 0.85rem;
+    }
+
+    .discord-modal-footer {
+        padding: 0.8rem 1rem;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .discord-cancel-btn,
+    .discord-send-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Extra small screens (under 360px) */
+@media (max-width: 360px) {
+    h1 {
+        font-size: 1.1rem;
+        letter-spacing: 0.5px;
     }
 
     .tab-btn {
-        padding: 8px 12px;
-        font-size: 0.8rem;
+        padding: 5px 8px;
+        font-size: 0.65rem;
     }
+
+    .paperdoll-container {
+        width: 200px !important;
+        height: 380px !important;
+    }
+
+    .gear-slot {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+/* === DISCORD WEBHOOK MODAL === */
+.discord-modal {
+    background: #1a1a1a;
+    width: 550px;
+    max-width: 95vw;
+    border-radius: 12px;
+    border: 1px solid #333;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+    animation: modalSlideDown 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+}
+
+.discord-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid #333;
+    background: linear-gradient(to bottom, #222, #1a1a1a);
+    border-radius: 12px 12px 0 0;
+}
+
+.discord-modal-header h3 {
+    margin: 0;
+    color: #f4b400;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.discord-close-btn {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: 0.2s;
+}
+
+.discord-close-btn:hover {
+    color: #ff5252;
+    transform: scale(1.15);
+}
+
+.discord-modal-body {
+    padding: 1.2rem 1.5rem 1rem 1.5rem;
+    background: #111;
+    min-height: 160px;
+}
+
+.discord-label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #ccc;
+    font-size: 0.82rem;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.discord-input {
+    width: 100%;
+    padding: 10px 14px;
+    background: #0a0a0a;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.9rem;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    outline: none;
+    transition: 0.3s;
+    box-sizing: border-box;
+}
+
+.discord-input:focus {
+    border-color: #5865F2;
+    box-shadow: 0 0 10px rgba(88, 101, 242, 0.3);
+}
+
+.discord-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    padding: 1rem 1.5rem;
+    background: #151515;
+    border-top: 1px solid #333;
+    border-radius: 0 0 12px 12px;
+}
+
+.discord-cancel-btn {
+    background: #333;
+    color: #ccc;
+    border: 1px solid #555;
+    padding: 9px 20px;
+    font-size: 0.82rem;
+    font-weight: bold;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.discord-cancel-btn:hover {
+    background: #444;
+    color: #fff;
+    border-color: #666;
+}
+
+.discord-send-btn {
+    background: #5865F2;
+    color: white;
+    border: 1px solid #4a54c9;
+    padding: 9px 20px;
+    font-size: 0.82rem;
+    font-weight: bold;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 2px 8px rgba(88, 101, 242, 0.3);
+}
+
+.discord-send-btn:hover {
+    background: #4752c4;
+    box-shadow: 0 4px 15px rgba(88, 101, 242, 0.5);
+    transform: translateY(-1px);
+}
+
+/* --- WEBHOOK PROFILES LIST --- */
+.webhook-profiles-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.webhook-section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    font-size: 0.82rem;
+    font-weight: bold;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.webhook-add-btn {
+    background: rgba(88, 101, 242, 0.15);
+    color: #7289da;
+    border: 1px solid rgba(88, 101, 242, 0.3);
+    padding: 5px 12px;
+    font-size: 0.78rem;
+    font-weight: bold;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.webhook-add-btn:hover {
+    background: rgba(88, 101, 242, 0.3);
+    color: #fff;
+    border-color: #5865F2;
+}
+
+.webhook-profiles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 280px;
+    overflow-y: auto;
+    padding-right: 2px;
+}
+
+.webhook-profiles-list:empty::after {
+    content: "No profiles saved yet. Click '+ Add New' to get started.";
+    display: block;
+    text-align: center;
+    color: #555;
+    font-size: 0.82rem;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    padding: 20px 0;
+    font-style: italic;
+}
+
+/* Scrollbar for the list */
+.webhook-profiles-list::-webkit-scrollbar {
+    width: 4px;
+}
+.webhook-profiles-list::-webkit-scrollbar-track {
+    background: #111;
+}
+.webhook-profiles-list::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 2px;
+}
+
+/* Profile Card */
+.webhook-profile-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #0f0f0f;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 10px 14px;
+    gap: 10px;
+    transition: 0.2s;
+}
+
+.webhook-profile-card:hover {
+    border-color: #444;
+    background: #141414;
+}
+
+.webhook-profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+}
+
+.webhook-profile-name {
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #e0e0e0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.webhook-profile-url {
+    font-size: 0.72rem;
+    color: #555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: monospace;
+}
+
+.webhook-profile-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.webhook-btn-send {
+    background: #5865F2;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+    white-space: nowrap;
+}
+
+.webhook-btn-send:hover {
+    background: #4752c4;
+    transform: translateY(-1px);
+}
+
+.webhook-btn-edit {
+    background: #333;
+    color: #aaa;
+    border: 1px solid #444;
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.webhook-btn-edit:hover {
+    background: #444;
+    color: #fff;
+}
+
+.webhook-btn-delete {
+    background: rgba(255, 82, 82, 0.1);
+    color: #ff5252;
+    border: 1px solid rgba(255, 82, 82, 0.25);
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.webhook-btn-delete:hover {
+    background: rgba(255, 82, 82, 0.25);
+    border-color: #ff5252;
+}
+
+/* --- WEBHOOK ADD/EDIT FORM --- */
+.webhook-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.webhook-form-title {
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    font-size: 0.88rem;
+    font-weight: bold;
+    color: #f4b400;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #222;
+}
+
+.webhook-form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.webhook-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.webhook-form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.discord-save-profile-btn {
+    background: linear-gradient(135deg, #5865F2, #4752c4);
+    color: white;
+    border: none;
+    padding: 9px 22px;
+    font-size: 0.82rem;
+    font-weight: bold;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 2px 8px rgba(88, 101, 242, 0.4);
+}
+
+.discord-save-profile-btn:hover {
+    background: linear-gradient(135deg, #4752c4, #3b44a9);
+    box-shadow: 0 4px 15px rgba(88, 101, 242, 0.5);
+    transform: translateY(-1px);
+}
+
+.discord-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid #333;
+    background: linear-gradient(to bottom, #222, #1a1a1a);
+    border-radius: 12px 12px 0 0;
+}
+
+.discord-modal-header h3 {
+    margin: 0;
+    color: #f4b400;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.discord-close-btn {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: 0.2s;
+}
+
+.discord-close-btn:hover {
+    color: #ff5252;
+    transform: scale(1.15);
+}
+
+.discord-modal-body {
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
+    background: #111;
+}
+
+.discord-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #ccc;
+    font-size: 0.85rem;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+}
+
+.discord-input {
+    width: 100%;
+    padding: 12px 14px;
+    background: #0a0a0a;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.95rem;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    outline: none;
+    transition: 0.3s;
+    box-sizing: border-box;
+}
+
+.discord-input:focus {
+    border-color: #5865F2;
+    box-shadow: 0 0 10px rgba(88, 101, 242, 0.3);
+}
+
+.discord-modal-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 1.2rem 1.5rem;
+    background: #151515;
+    border-top: 1px solid #333;
+    border-radius: 0 0 12px 12px;
+}
+
+.discord-cancel-btn {
+    background: #333;
+    color: #ccc;
+    border: 1px solid #555;
+    padding: 10px 24px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.discord-cancel-btn:hover {
+    background: #444;
+    color: #fff;
+    border-color: #666;
+}
+
+.discord-send-btn {
+    background: #5865F2;
+    color: white;
+    border: 1px solid #4a54c9;
+    padding: 10px 24px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    font-family: 'Expressway', 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 2px 8px rgba(88, 101, 242, 0.3);
+}
+
+.discord-send-btn:hover {
+    background: #4752c4;
+    box-shadow: 0 4px 15px rgba(88, 101, 242, 0.5);
+    transform: translateY(-1px);
 }
