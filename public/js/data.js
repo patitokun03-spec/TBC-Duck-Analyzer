@@ -451,7 +451,7 @@ const OPTIMAL_ENCHANTS = {
             2928, 2928
         ],
         alt: [
-            2978,           // Shoulder: lesser Warding
+            2978,           // Shoulder: lesser Warding.
             1891,           // Chest: +4 Stats
             2662, 368, 1888, // Cloak: Armor, Agi, Resist
             2613,           // Cloak: +2% Threat
