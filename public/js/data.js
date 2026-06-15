@@ -104,7 +104,8 @@ const BUFF_DB = {
     27237: {name:"Healthstone 2/2",icon:"inv_stone_04",              order:70, category:5},
     16666: {name:"Demonic Rune",   icon:"inv_misc_rune_04",          order:70, category:5},
     27869: {name:"Dark Rune",      icon:"spell_shadow_sealofkings",  order:70, category:5},
-    27089: {name:"Mana Emerald",   icon:"inv_misc_gem_sapphire_02",  order:70, category:5},
+    10058: {name:"Mana Ruby", icon:"inv_misc_gem_ruby_01",           order:70, category:5},
+    27103: {name:"Mana Emerald", icon:"inv_misc_gem_stone_01",       order:70, category:5},
     41031: {name:"Nethergon Energy",icon:"inv_potion_137",           order:70, category:5},
     41032: {name:"Nethergon Vapor", icon:"inv_potion_131",           order:70, category:5},
     41618: {name:"Bottled Nethergon Energy", icon:"inv_potion_156",  order:70, category:5},
@@ -240,7 +241,7 @@ const ENCHANT_DB = {
     3096: {name:"+17 Str & +17 Int"},
     3150: {name:"+6 MP5"},
     33990: {name:"+15 Spi"},
-    
+
     // Seals para tracking por Auras (no renderizar en consumibles)
     25742: {name:"Seal of Righteousness", category: 'seal'},
     25740: {name:"Seal of Righteousness", category: 'seal'},
@@ -1097,7 +1098,7 @@ if (typeof window !== 'undefined') {
     window.TIMELINE_SPELLS = TIMELINE_SPELLS;
     window.OPTIMAL_ENCHANTS = OPTIMAL_ENCHANTS;
     window.CLASS_ABILITY_TRACKING = CLASS_ABILITY_TRACKING;
-    
+
     window.isBuffItem = (name) => {
         if (!name) return false;
         const lower = name.toLowerCase();
@@ -1112,7 +1113,7 @@ if (typeof window !== 'undefined') {
 
     window.getSpellSortCategory = (name, id) => {
         if (window.isTrinket(name)) return 0; // Trinkets absolute first
-        
+
         const lower = name.toLowerCase();
         if (lower.includes('heroism') || lower.includes('bloodlust')) return 1;
 
